@@ -1,0 +1,87 @@
+const artistCharacters=[
+  {id:'brasa',name:'Brasa',coat:'red',motto:'Um traço decidido. Uma ideia por vez.',detail:'Avental vermelho · cabelo curto'},
+  {id:'musgo',name:'Musgo',coat:'sage',motto:'Tempo para olhar. Coragem para tentar.',detail:'Avental verde · cabelo volumoso'},
+  {id:'mare',name:'Maré',coat:'blue',motto:'Curiosidade em cada mudança de direção.',detail:'Avental azul · óculos redondos'},
+  {id:'ambar',name:'Âmbar',coat:'ochre',motto:'Construir, desmontar e descobrir de novo.',detail:'Avental ocre · boné de artista'},
+  {id:'amora',name:'Amora',coat:'plum',motto:'Imaginação que ganha forma no papel.',detail:'Avental ameixa · cabelo preso'}
+];
+const artistProfile=id=>v2()?.profiles?.[id];
+const artistDisplayName=id=>artistProfile(id)?.nickname||getStudent(id)?.name||'Artista';
+let characterDraft=null,characterStep=0;
+const profileLegacy={sprite:atelierSprite,student:showStudent,customize:customizeAtelier};
+function characterArt(id,variant=0) {
+  const character=artistCharacters.find(c=>c.id===id)||artistCharacters[0];
+  const detail={musgo:'<path fill="#493e33" d="M3 8h4V3h5V0h10v4h5v4h3v7h-5V9H7v7H3z"/>',mare:'<g fill="none" stroke="#252635" stroke-width="1.5"><circle cx="11.5" cy="17" r="4"/><circle cx="20.5" cy="17" r="4"/><path d="M15.5 16h1"/></g>',ambar:'<path fill="#dab471" d="M5 8h3V2h15v6h7v4H5z"/><path fill="#7e5436" d="M7 8h18v3H7z"/>',amora:'<path fill="#3c2e3b" d="M22 3h7v8h-7zM25 8h6v15h-5z"/><path fill="#d5a3b9" d="M23 8h6v3h-6z"/>'}[id]||'';
+  return profileLegacy.sprite(character.coat,variant).replace('</svg>',detail+'</svg>');
+}
+function ensureProfiles() {for(const key of ['profiles','profileDrafts','onboardingSeen'])if(!v2()[key]||typeof v2()[key]!=='object')v2()[key]={};}
+function validateProfiles(data,schoolData) {
+  if(!data.profiles)return;
+  if(typeof data.profiles!=='object'||Array.isArray(data.profiles))throw new Error('Perfis inválidos nesta cópia.');
+  const nicknames=new Set();
+  for(const [id,p] of Object.entries(data.profiles)) {
+    if(!p||p.studentId!==id||!schoolData.students.some(s=>s.id===id)||typeof p.nickname!=='string'||!artistCharacters.some(c=>c.id===p.character)||!['not-linked','simulated'].includes(p.google?.status)||!['not-linked','active','pending'].includes(p.asaas?.status)||typeof p.complete!=='boolean')throw new Error('Perfil de personagem inválido nesta cópia.');
+    if(p.complete){const name=p.nickname.toLocaleLowerCase('pt-BR');if(!/^[\p{L}\p{N} ._-]{3,24}$/u.test(p.nickname)||nicknames.has(name))throw new Error('Nickname inválido ou duplicado nesta cópia.');nicknames.add(name);}
+    if(p.email!==undefined&&typeof p.email!=='string'||p.goal!==undefined&&typeof p.goal!=='string')throw new Error('Identidade inválida nesta cópia.');
+  }
+}
+function initProfiles() {
+  ensureProfiles();
+  const oldSync=syncSchoolChrome,oldApply=applyRole,oldToday=renderToday,oldNav=renderV2Nav;
+  syncSchoolChrome=function(){oldSync();if(state.role==='student'){const p=artistProfile(currentLearner()?.id);if(p?.complete){$('#profile-name').textContent=p.nickname;$('.profile>.avatar').innerHTML=characterArt(p.character);$('.rail .avatar.me').innerHTML=characterArt(p.character);}else{$('.profile>.avatar').innerHTML=characterArt('brasa');$('.rail .avatar.me').innerHTML=characterArt('brasa');}}else{const html=`<img src="${assets.pixel}" alt="Seu avatar Xuimzinho">`;$('.profile>.avatar').innerHTML=html;$('.rail .avatar.me').innerHTML=html;}};
+  applyRole=function(){oldApply();maybeOnboarding();};
+  const oldLearnerChange=$('#learner-select').onchange;$('#learner-select').onchange=e=>{oldLearnerChange(e);maybeOnboarding();};
+  const oldClass=switchClass;switchClass=function(id){oldClass(id);maybeOnboarding();};
+  renderV2Nav=function(){oldNav();if(state.role==='student')$('#v2-nav .v2-nav-secondary')?.insertAdjacentHTML('afterbegin',`<button class="nav-item" data-profile-action="own">${icon('users')}Meu personagem</button>`);};
+  renderToday=function(){oldToday();if(state.role!=='student')return;const p=artistProfile(currentLearner()?.id);$('#view-today .v2-page-head')?.insertAdjacentHTML('afterend',p?.complete?`<button class="v2-profile-ribbon" data-profile-action="own"><span class="v2-profile-mini">${characterArt(p.character)}</span><span><strong>${escapeHTML(p.nickname)}</strong><small>${escapeHTML(p.goal||'Seu caminho começa com o próximo desenho.')}</small></span><span class="mono">MEU PERSONAGEM →</span></button>`:`<button class="v2-profile-ribbon" data-profile-action="create"><span class="v2-profile-mini">${characterArt('brasa')}</span><span><strong>Seu lugar no ateliê começa com você.</strong><small>Escolha um personagem e conte como quer ser chamado.</small></span><span class="mono">CRIAR PERSONAGEM →</span></button>`);};
+  atelierName=function(){return state.role==='teacher'?currentClass().teacher:artistDisplayName(currentLearner()?.id);};
+  const oldPeople=atelierPeople;atelierPeople=function(){return oldPeople().map(p=>{const profile=artistProfile(p.id);return profile?{...p,name:profile.nickname,coat:artistCharacters.find(c=>c.id===profile.character)?.coat||p.coat}:p;});};
+  atelierSprite=function(coat,variant){return characterArt(artistCharacters.find(c=>c.coat===coat)?.id||'brasa',variant);};
+  customizeAtelier=function(){if(state.role==='student')showCharacterCreator();else profileLegacy.customize();};
+  showStudent=function(id){showArtistProfile(id);};
+  const oldAtelier=renderAtelier;renderAtelier=function(){const p=state.role==='student'&&artistProfile(currentLearner()?.id);if(p)atelierState().coat=artistCharacters.find(c=>c.id===p.character)?.coat||'red';oldAtelier();};
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-profile-action]');if(!b)return;const action=b.dataset.profileAction;if(action==='create')showCharacterCreator();if(action==='own')showArtistProfile(currentLearner()?.id);});
+  $('#modal').addEventListener('close',()=>$('#modal').classList.remove('v2-character-modal'));
+}
+function maybeOnboarding() {
+  ensureProfiles();const id=currentLearner()?.id;
+  if(state.role==='student'&&id&&!artistProfile(id)?.complete&&!v2().onboardingSeen[id]){v2().onboardingSeen[id]=true;persist();showCharacterCreator();}
+}
+function showCharacterCreator() {
+  if(state.role!=='student')return;ensureProfiles();const student=currentLearner();if(!student)return;
+  characterDraft=structuredClone(v2().profileDrafts[student.id]||artistProfile(student.id)||{studentId:student.id,character:'brasa',nickname:'',goal:'',email:student.email||'',google:{status:'not-linked'},asaas:{status:'not-linked'}});
+  characterStep=0;renderCharacterCreator();
+}
+function saveCharacterDraft() {v2().profileDrafts[currentLearner().id]=structuredClone(characterDraft);persist();}
+function readCharacterForm() {
+  if($('#character-nickname'))characterDraft.nickname=$('#character-nickname').value.trim();
+  if($('#character-goal'))characterDraft.goal=$('#character-goal').value.trim();
+  if($('#character-email')){const email=$('#character-email').value.trim();if(email!==characterDraft.email)characterDraft.google={status:'not-linked'};characterDraft.email=email;}
+  saveCharacterDraft();
+}
+function renderCharacterCreator() {
+  const student=currentLearner(),character=artistCharacters.find(c=>c.id===characterDraft.character)||artistCharacters[0];
+  const steps=['Seu personagem','Sua identidade','Seu lugar no ateliê'];
+  const body=characterStep===0?`<span class="eyebrow">01 / ESCOLHA SEU XUIMZINHO</span><h2>Qual deles vai desenhar com você?</h2><p class="v2-character-intro">Um rosto para encontrar a turma. Você pode mudar depois.</p><div class="v2-character-roster">${artistCharacters.map(c=>`<button type="button" class="v2-character-choice ${c.id===character.id?'selected':''}" data-character="${c.id}" aria-label="Escolher ${c.name}" aria-pressed="${c.id===character.id}"><span>${characterArt(c.id)}</span><strong>${c.name}</strong><small>${c.detail}</small></button>`).join('')}</div>`:characterStep===1?`<span class="eyebrow">02 / ASSINE SEU PRÓXIMO TRAÇO</span><h2>Como a turma vai chamar você?</h2><p class="v2-character-intro">Seu nickname aparece no ateliê e nas conversas. O professor também vê seu nome de matrícula.</p><label class="field">Nickname<input id="character-nickname" maxlength="24" minlength="3" autocomplete="nickname" value="${escapeHTML(characterDraft.nickname)}" placeholder="Ex.: LuaGrafite" required><small>3 a 24 caracteres. Letras, números, espaços, ponto, _ e -.</small></label><label class="field">O que você quer aprender a desenhar?<textarea id="character-goal" rows="3" maxlength="300" placeholder="Quero conseguir desenhar meus próprios personagens…">${escapeHTML(characterDraft.goal)}</textarea></label><div class="v2-identity-note"><span>Nome de matrícula</span><strong>${escapeHTML(student.name)}</strong><small>O nickname não altera sua identificação para o professor.</small></div>`:`<span class="eyebrow">03 / UMA IDENTIDADE NO ATELIÊ</span><h2>Seu próximo capítulo começa aqui.</h2><p class="v2-character-intro">${escapeHTML(currentClass().name)} · ${escapeHTML(currentClass().course)}</p><div class="v2-character-links"><article><header><span class="v2-provider-symbol">G</span><div><strong>Conta Google</strong><small>${characterDraft.google.status==='simulated'?'Vínculo simulado':'Identificação da conta'}</small></div><span class="tag">DEMO</span></header><label class="field">E-mail da conta<input id="character-email" type="email" maxlength="160" autocomplete="email" value="${escapeHTML(characterDraft.email)}" placeholder="seunome@exemplo.com"></label><button class="btn" type="button" id="character-google">${characterDraft.google.status==='simulated'?'Vínculo simulado ✓':'Simular identificação com Google'}</button></article><article><header><span class="v2-provider-symbol">a</span><div><strong>Matrícula · Asaas</strong><small>${characterDraft.asaas.status==='active'?'Matrícula ativa · simulação':'Vínculo a configurar pelo professor'}</small></div><span class="tag">DEMO</span></header><p>Seu personagem e seu sketchbook pertencem ao mesmo aluno. O professor acompanha a matrícula por esse perfil.</p></article></div><p class="v2-integration-note">Nesta prévia, nenhuma conta é conectada e nenhuma cobrança é criada. Você pode entrar sem simular o Google.</p>`;
+  openModal(artistProfile(student.id)?.complete?'Seu personagem no ateliê':'Bem-vindo ao seu ateliê',`<div class="v2-character-creation"><aside class="v2-character-preview"><span class="eyebrow">XUIM ART / CRIAÇÃO DE PERSONAGEM</span><div class="v2-character-pedestal"><div class="v2-character-aura"></div>${characterArt(character.id)}</div><span class="v2-character-caption">${character.name.toUpperCase()}</span><h2>${escapeHTML(characterDraft.nickname||'Seu próximo eu.')}</h2><p>${escapeHTML(character.motto)}</p><span class="v2-character-world">${escapeHTML(currentClass().name)} · ATELIÊ DE DESENHO</span></aside><section class="v2-character-form"><div class="v2-character-progress" aria-label="Etapas do cadastro">${steps.map((s,i)=>`<span class="${i===characterStep?'current':i<characterStep?'done':''}" ${i===characterStep?'aria-current="step"':''}><b>${String(i+1).padStart(2,'0')}</b>${s}</span>`).join('')}</div>${body}<p id="character-error" class="error" role="alert"></p><div class="v2-character-footer">${characterStep?'<button class="btn quiet" id="character-back">← Voltar</button>':'<button class="btn quiet" id="character-later">Explorar primeiro</button>'}<button class="btn primary" id="character-next">${characterStep===2?'Entrar no ateliê':'Continuar →'}</button></div></section></div>`);
+  $('#modal').classList.add('v2-character-modal');
+  $$('[data-character]').forEach(b=>b.onclick=()=>{characterDraft.character=b.dataset.character;saveCharacterDraft();renderCharacterCreator();});
+  for(const id of ['character-nickname','character-goal','character-email'])if($('#'+id))$('#'+id).oninput=readCharacterForm;
+  if($('#character-later'))$('#character-later').onclick=()=>{saveCharacterDraft();closeModal();};
+  if($('#character-back'))$('#character-back').onclick=()=>{readCharacterForm();characterStep--;renderCharacterCreator();};
+  if($('#character-google'))$('#character-google').onclick=()=>{readCharacterForm();const email=$('#character-email');if(!email.value||!email.checkValidity()){$('#character-error').textContent='Informe um e-mail válido para simular esse vínculo.';email.focus();return;}characterDraft.google={status:'simulated',email:characterDraft.email};saveCharacterDraft();renderCharacterCreator();};
+  $('#character-next').onclick=()=>{readCharacterForm();if(characterStep===1){const nick=characterDraft.nickname;if(!/^[\p{L}\p{N} ._-]{3,24}$/u.test(nick)){$('#character-error').textContent='Escolha um nickname de 3 a 24 caracteres, usando letras, números, espaço, ponto, _ ou -.';$('#character-nickname').focus();return;}if(Object.values(v2().profiles).some(p=>p.studentId!==student.id&&p.nickname.toLocaleLowerCase('pt-BR')===nick.toLocaleLowerCase('pt-BR'))){$('#character-error').textContent='Esse nickname já está em uso no ateliê. Experimente outra assinatura.';return;}}
+    if(characterStep<2){characterStep++;saveCharacterDraft();renderCharacterCreator();return;}
+    if(characterDraft.email&&!$('#character-email').checkValidity()){$('#character-error').textContent='Confira o e-mail ou deixe o campo vazio para continuar.';return;}
+    v2().profiles[student.id]={...structuredClone(characterDraft),studentId:student.id,complete:true,updatedAt:new Date().toISOString()};delete v2().profileDrafts[student.id];student.goal=characterDraft.goal||student.goal;if(characterDraft.email)student.email=characterDraft.email;atelierState().coat=character.coat;saveSchool('Personagem criado. Bem-vindo, '+characterDraft.nickname+'!');closeModal();navigate('atelier');
+  };
+}
+function showArtistProfile(id) {
+  const person=getStudent(id);if(!person||person.classId!==currentClass().id||state.role==='student'&&id!==currentLearner()?.id)return;
+  const p=artistProfile(id),teacher=state.role==='teacher',threads=v2().threads.filter(t=>t.studentId===id),attendance=studentAttendance(person);
+  openModal(p?.nickname||person.name,`<div class="v2-artist-profile"><aside><div class="v2-profile-character">${characterArt(p?.character||'brasa')}</div><h2>${escapeHTML(p?.nickname||'Personagem por criar')}</h2><p>${escapeHTML(person.name)}</p><span class="tag">${p?.complete?'ARTISTA DO ATELIÊ':'CADASTRO INICIAL'}</span></aside><section><span class="eyebrow">${escapeHTML(currentClass().name)} / PERFIL DO ARTISTA</span><h3>${escapeHTML(person.goal||'Um objetivo ainda por descobrir.')}</h3><div class="v2-profile-stats"><div><strong>${threads.length}</strong><small>estudos</small></div><div><strong>${threads.filter(t=>t.status==='complete').length}</strong><small>concluídos</small></div><div><strong>${studentXP(person)}</strong><small>XP</small></div><div><strong>${attendance.percent===null?'—':attendance.percent+'%'}</strong><small>presença</small></div></div><div class="v2-profile-connections"><h4>Conta & matrícula <span class="tag">SIMULAÇÃO</span></h4><div><span>Google</span><strong>${p?.google?.status==='simulated'?'Identificação simulada':'Não vinculado'}</strong><small>${escapeHTML(p?.email||person.email||'E-mail ainda não informado')}</small></div><div><span>Asaas</span><strong>${{active:'Matrícula ativa · demo',pending:'Matrícula pendente · demo','not-linked':'Não vinculado'}[p?.asaas?.status||'not-linked']}</strong><small>Mesmo registro de aluno: ${escapeHTML(person.id)}</small></div><p>Nenhum acesso ao Google ou ao Asaas é feito neste HTML.</p></div><div class="v2-profile-actions"><button class="btn primary" id="profile-sketchbook">Abrir sketchbook</button>${teacher?'<button class="btn" id="profile-academic">Ficha pedagógica</button><button class="btn quiet" id="profile-enrollment">Simular vínculo Asaas</button>':'<button class="btn" id="profile-customize">'+(p?.complete?'Editar personagem':'Criar meu personagem')+'</button>'}</div></section></div>`);
+  $('#profile-sketchbook').onclick=()=>{sketchbookStudent=id;notebookFilter='all';closeModal();navigate('sketchbooks');};
+  if($('#profile-customize'))$('#profile-customize').onclick=showCharacterCreator;
+  if($('#profile-academic'))$('#profile-academic').onclick=()=>profileLegacy.student(id);
+  if($('#profile-enrollment'))$('#profile-enrollment').onclick=()=>{openModal('Matrícula · simulação Asaas',`<form id="profile-enrollment-form"><p class="form-intro">${escapeHTML(person.name)}${p?.nickname?' / '+escapeHTML(p.nickname):''}. Esta alteração testa o vínculo no perfil; não gera cobrança.</p><label class="field">Situação da matrícula<select id="profile-enrollment-status"><option value="not-linked">Não vinculado</option><option value="active">Matrícula ativa · simulação</option><option value="pending">Matrícula pendente · simulação</option></select></label><button class="btn primary" type="submit">Salvar vínculo simulado</button></form>`);$('#profile-enrollment-status').value=p?.asaas?.status||'not-linked';$('#profile-enrollment-form').onsubmit=e=>{e.preventDefault();if(!v2().profiles[id])v2().profiles[id]={studentId:id,nickname:'',character:'brasa',complete:false,google:{status:'not-linked'},email:person.email||'',goal:person.goal||''};v2().profiles[id].asaas={status:$('#profile-enrollment-status').value,studentId:id};saveSchool('Vínculo de matrícula atualizado nesta simulação.');showArtistProfile(id);};};
+}

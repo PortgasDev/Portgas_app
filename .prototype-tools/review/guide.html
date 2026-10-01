@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Xuim Art · Caderno de revisão 2.0</title>
+<style>/* EMBEDDED_FONTS */
+/* REVIEW_CSS */</style>
+</head>
+<body>
+<a class="skip" href="#content">Pular para o assunto</a>
+<header class="topbar">
+  <a class="wordmark" href="#essencia" aria-label="Xuim Art — início da revisão">XUIM<span>ART</span><small>CADERNO DE REVISÃO / 2.0</small></a>
+  <div class="top-actions"><span id="save-status" role="status">Preparando caderno…</span><a class="button quiet" href="#v1-mapa">V1 → V2</a><a class="button quiet" href="atelie-xuim-2.0.html" target="_blank" rel="noopener">Abrir plataforma ↗</a><button class="button primary" id="export-top">Exportar feedback</button></div>
+</header>
+<div id="storage-warning" class="warning" role="alert" hidden></div>
+<div class="shell">
+  <aside class="sidebar" aria-label="Índice da revisão">
+    <button id="mobile-index" class="button" aria-expanded="false" aria-controls="index-body">Índice de assuntos <span>＋</span></button>
+    <div id="index-body">
+      <div class="index-intro"><span class="eyebrow">NO SEU RITMO</span><p id="progress-label"></p><progress id="progress" max="1" value="0" aria-label="Áreas com alguma resposta"></progress><small>Comentar uma área não aprova seus detalhes.</small></div>
+      <label class="search-label" for="search">Encontrar assunto</label><input id="search" type="search" placeholder="Ex.: sketchbook, XP, mesa…" autocomplete="off">
+      <label class="sr-only" for="filter">Filtrar assuntos</label><select id="filter"><option value="all">Todos os assuntos</option><option value="untouched">Sem resposta</option><option value="answered">Com resposta</option><option value="changes">Com mudanças propostas</option></select>
+      <nav id="index" aria-label="Assuntos"></nav>
+      <a href="#respostas" class="summary-link">Ler minhas respostas <span>↗</span></a>
+      <button class="text-button" id="import-button">Retomar uma cópia JSON</button><input id="import-file" type="file" accept=".json,application/json" hidden>
+    </div>
+  </aside>
+  <main id="content" tabindex="-1"></main>
+</div>
+<dialog id="export-dialog" aria-labelledby="export-title"><div class="dialog-head"><h2 id="export-title">Leve suas respostas.</h2><button class="close-button" data-close aria-label="Fechar exportação">×</button></div><p>Baixe o feedback e anexe o arquivo nesta conversa quando quiser que eu leia. Pode enviar uma revisão parcial.</p><div id="export-count" class="export-count"></div><button id="download-md" class="button primary wide">Baixar feedback para me enviar (.md)</button><p class="small">Texto legível com as perguntas, o contexto e suas respostas. Inclui apenas os itens que você respondeu.</p><button id="download-json" class="button wide">Baixar cópia para continuar depois (.json)</button><p class="small">Guarda respostas e posição de leitura. Use “Retomar uma cópia JSON” em outro navegador ou computador.</p><button id="copy-feedback" class="text-button">Copiar o feedback como texto</button><p id="export-status" role="status"></p><label id="copy-fallback-label" for="copy-fallback" hidden>Selecione e copie o texto abaixo:</label><textarea id="copy-fallback" rows="7" readonly hidden></textarea><p class="footnote">As respostas ficam no navegador, não dentro deste HTML, e não são enviadas automaticamente. Use o mesmo navegador e endereço para continuar, ou retome uma cópia JSON. A plataforma permanece separada e inalterada.</p></dialog>
+<dialog id="import-dialog" aria-labelledby="import-title"><div class="dialog-head"><h2 id="import-title">Retomar esta revisão?</h2><button class="close-button" data-close aria-label="Cancelar importação">×</button></div><p id="import-description"></p><p>A cópia vai substituir as respostas deste guia neste navegador. Você pode exportar suas respostas atuais antes.</p><div class="dialog-actions"><button id="before-import" class="button">Exportar atuais primeiro</button><button id="confirm-import" class="button primary">Substituir e retomar</button></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript>Ative JavaScript para navegar e preencher este caderno de revisão.</noscript>
+<script type="application/json" id="catalog">__CATALOG__</script>
+<!-- FONT_LICENSES -->
+<script>/* REVIEW_SCRIPT */</script>
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "format": "xuim-review",
+  "schema": 1,
+  "edition": "2.0",
+  "revision": "2026-09-20",
+  "current": "sketchbook",
+  "updatedAt": "2026-09-20T12:00:00.000Z",
+  "answers": {
+    "essencia": {"decision":"change","text":"QA — Quero começar pelas conversas reais.\nTexto com acentos, \"aspas\" e <script>literal</script>."},
+    "essencia-processo": {"decision":"","text":"QA — A orientação pode vir imediatamente, com a arte ainda em processo."},
+    "sketchbook": {"decision":"unsure","text":""}
+  }
+}

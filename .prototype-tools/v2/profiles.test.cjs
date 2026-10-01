@@ -1,0 +1,11 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const context=vm.createContext({atelierSprite(){},showStudent(){},customizeAtelier(){}});
+vm.runInContext(fs.readFileSync(__dirname+'/v2-profiles.js','utf8')+'\nthis.validate=validateProfiles;',context);
+const school={students:[{id:'lia'},{id:'pedro'}]};
+const profile={studentId:'lia',character:'mare',nickname:'LuaGrafite',complete:true,email:'lia@example.com',google:{status:'simulated'},asaas:{status:'active'},goal:'Desenhar personagens'};
+assert.doesNotThrow(()=>context.validate({profiles:{lia:profile}},school));
+assert.throws(()=>context.validate({profiles:{lia:{...profile,studentId:'pedro'}}},school));
+assert.throws(()=>context.validate({profiles:{lia:profile,pedro:{...profile,studentId:'pedro',nickname:'luagrafite'}}},school));
+assert.throws(()=>context.validate({profiles:{lia:{...profile,google:{status:'connected-for-real'}}}},school));
+assert.throws(()=>context.validate({profiles:{lia:{...profile,nickname:'<script>'}}},school));
+console.log('PASS: perfil, identidade do aluno, nickname único e estados explicitamente simulados.');

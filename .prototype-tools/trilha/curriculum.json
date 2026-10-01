@@ -1,0 +1,73 @@
+{
+  "id":"xuim-48-semanas-v1",
+  "modules":[
+    {"id":1,"title":"Dominando a Tridimensionalidade","short":"Pensar em 3D","icon":"cube","color":"#de2246","weeks":[
+      [1,"Mentalidade do Artista","Estudo saudável."],
+      [2,"A Base do Desenho","Aprendendo a Observar"],
+      [3,"Pensamento 3D","Desenho Isométrico e 1 Ponto de Fuga."],
+      [4,"Cortando e manipulando a caixa","2 Pontos de Fuga."],
+      [5,"Criando uma Cena com caixas","3 Pontos de Fuga."],
+      [6,"Girando caixas","Rotação de formas"],
+      [7,"Círculo em Perspectiva","Elipses, Cilindros e Esferas"],
+      [8,"Fusão de Formas","Intersecções"],
+      [9,"Luz e Sombra","Técnicas de Projeção e Escala de Cinza"],
+      [10,"Introdução ao Sketch Dinâmico","Rotacionando Objetos"],
+      [11,"PROJETO 1 · Bancada Fictícia","Composição e Storytelling"],
+      [12,"Técnicas de Estudo","O poder do autofeedback."],
+      [13,"ENTREGA PROJETO 1","Considerações, feedbacks e ajustes finais"]
+    ]},
+    {"id":2,"title":"Sketch Dinâmico","short":"Dar movimento","icon":"vehicle","color":"#77bba5","weeks":[
+      [14,"Sketch Dinâmico","Motos"],
+      [15,"Sketch Dinâmico","Carros"],
+      [16,"Sketch Dinâmico","Insetos"],
+      [17,"PROJETO 2 · Veículo de transporte","Design, forma e função"],
+      [18,"Blender e Técnicas de Estudo","Expandindo sua biblioteca visual e ferramentas"],
+      [19,"ENTREGA PROJETO 2","Considerações, feedbacks e ajustes finais"]
+    ]},
+    {"id":3,"title":"Textura em Formas Orgânicas e Sólidas","short":"Sentir a superfície","icon":"leaf","color":"#c5b277","weeks":[
+      [20,"Volume e Hachura","Ferramentas para Representação Visual"],
+      [21,"Estudo de Texturas","Entendendo diferentes texturas"],
+      [22,"Ritmo, shapes e estrutura","Natureza e Vegetação"],
+      [23,"Ritmo, shapes e estrutura","Animais e criaturas"]
+    ]},
+    {"id":4,"title":"Storytelling e Composição em Projetos","short":"Contar histórias","icon":"scene","color":"#8db6d2","weeks":[
+      [24,"PROJETO 3 · Criaturas e Montarias","Linguagem das Formas."],
+      [25,"Olhar de Concept Artist","Composição com cores."],
+      [26,"ENTREGA PROJETO 3","Considerações, feedbacks e ajustes finais."],
+      [27,"PROJETO 4 · Prop de Arma ou acessório","Design com Narrativa."],
+      [28,"Técnicas de Estudo","Aprendendo sobre funcionalidade."],
+      [29,"ENTREGA PROJETO 4","Considerações, feedbacks e ajustes finais."],
+      [30,"PROJETO 5","Contando uma história: Ambiente Interno."],
+      [31,"BLENDER","Usando o 3D no processo."],
+      [32,"ENTREGA PROJETO 5","Considerações, feedbacks e ajustes finais."]
+    ]},
+    {"id":5,"title":"Figura Humana e Roupas","short":"Encontrar o gesto","icon":"gesture","color":"#d49980","weeks":[
+      [33,"Pontos de Referências","Landmarks e Proporção."],
+      [34,"Desenho Gestual","Fluidez e simplificação."],
+      [35,"Blocagem","Rotação de boneco caixa."],
+      [36,"Dobras e Roupas","Os 7 tipos de dobras"]
+    ]},
+    {"id":6,"title":"Anatomia","short":"Criar seu personagem","icon":"head","color":"#b0bd8a","weeks":[
+      [37,"Blocagem","Cabeça humana simplificada."],
+      [38,"Anatomia","Característica do rosto e Expressões Faciais."],
+      [39,"Anatomia","Membros Superiores I."],
+      [40,"Anatomia","Membros Superiores II."],
+      [41,"Anatomia","Braços"],
+      [42,"Anatomia","Membros Inferiores"],
+      [43,"Anatomia","Mãos e Pés"],
+      [44,"Anatomia","Biotipos e Estilização da Figura Humana"],
+      [45,"PROJETO 6","Criando seu Personagem!"],
+      [46,"Técnicas de Estudo","Aprendendo com as soluções de outros artistas"],
+      [47,"ENTREGA PROJETO 6","Considerações e feedbacks"],
+      [48,"BÔNUS · O que fazer agora?","Direcionamento de Mercado."]
+    ]}
+  ],
+  "projects":[
+    {"id":1,"title":"Bancada Fictícia","start":11,"delivery":13,"icon":"cube"},
+    {"id":2,"title":"Veículo de transporte","start":17,"delivery":19,"icon":"vehicle"},
+    {"id":3,"title":"Criaturas e Montarias","start":24,"delivery":26,"icon":"leaf"},
+    {"id":4,"title":"Prop de Arma ou acessório","start":27,"delivery":29,"icon":"tool"},
+    {"id":5,"title":"Ambiente Interno","start":30,"delivery":32,"icon":"scene"},
+    {"id":6,"title":"Criando seu Personagem!","start":45,"delivery":47,"icon":"head"}
+  ]
+}

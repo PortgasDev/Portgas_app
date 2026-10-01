@@ -1,0 +1,396 @@
+{
+  "edition": "2.0",
+  "revision": "2026-09-20",
+  "groups": ["Antes das telas", "Aluno e sketchbook", "Aulas e professor", "Ateliê e convivência", "Percursos completos", "Fechamento"],
+  "sections": [
+    {
+      "id": "essencia", "group": "Antes das telas", "title": "A escola que você quer criar",
+      "path": "Comece pela sua prática de ensino; não precisa abrir o protótipo.",
+      "purpose": "Alinhar o que a plataforma deve facilitar na vida do professor e dos alunos.",
+      "current": "A versão 2.0 reúne aulas, exercícios, sketchbooks, acompanhamento, personagens e um mapa. Essa combinação ainda carrega interpretações minhas sobre como você ensina.",
+      "assumption": "Organizei o produto em torno de turmas, aulas e conversas por estudo. Isso é uma proposta de organização, não uma definição fechada da sua escola.",
+      "question": "Como é uma semana real de aula para você? Conte o que acontece antes, durante e depois, incluindo o que o aluno faz quando está perdido.",
+      "items": [
+        {"id":"essencia-integracao","title":"Um sistema que funciona como um todo","origin":"Pedido seu","description":"Você pediu que a parte de gestão e evolução faça parte do sistema e que tarefas e sketchbooks se conectem de forma orgânica.","question":"Quais informações deveriam acompanhar o aluno em qualquer tela? O que hoje parece uma parte solta?"},
+        {"id":"essencia-processo","title":"O sketchbook é conversa durante o desenho","origin":"Pedido seu","description":"O aluno pode trazer uma arte inacabada ou uma dúvida. O professor pode responder assim que puder, sem aguardar a semana seguinte.","question":"Além de imagens e texto, o que costuma fazer parte dessas conversas? Como uma orientação normalmente continua?"},
+        {"id":"essencia-pessoas","title":"Quem participa da escola","origin":"Minha interpretação","description":"Modelei um professor e alunos organizados em turmas. Monitores, vários professores, alunos em vários cursos e visitantes não têm percursos próprios completos.","question":"Quem precisa usar a plataforma, com quais responsabilidades? Um aluno pode participar de mais de uma turma?"},
+        {"id":"essencia-sucesso","title":"O que tornaria isso útil de verdade","origin":"Em aberto","description":"Ainda precisamos escolher quais problemas da rotina têm mais peso que os recursos visuais.","question":"Quais três situações do Discord/Galdrabok você mais quer resolver? O que vale preservar porque já funcionava bem?"}
+      ], "links":["sketchbook","percurso-duvida"]
+    },
+    {
+      "id":"estrutura","group":"Antes das telas","title":"Menus e organização geral",
+      "path":"Barra lateral da plataforma · seletores de Professor/Aluno e turma.",
+      "purpose":"Dar a cada pessoa caminhos claros para estudar, ensinar e encontrar a turma.",
+      "current":"Aluno: Hoje, Aulas, Meu sketchbook e Ateliê. Professor: Hoje, Aulas, Alunos, Acompanhamento e Ateliê. Há acessos secundários a avisos, conversas e cópia dos dados. O aluno também tem Meu personagem.",
+      "assumption":"Usei menus diferentes por papel, com o calendário dentro de Aulas e relatórios dentro de Alunos. O mapa é uma área acessível pelo menu.",
+      "question":"Se você pudesse reorganizar tudo, quais seriam as portas de entrada? Algo merece ser unido, removido, renomeado ou ganhar mais destaque?",
+      "items":[
+        {"id":"estrutura-hoje","title":"Hoje como primeira tela","description":"Ao navegar ou trocar de papel, a prévia costuma voltar para Hoje. Após concluir a criação de personagem, o aluno vai ao Ateliê.","question":"Onde o aluno deveria chegar ao entrar? E o professor? A primeira visita deveria ser diferente das seguintes?"},
+        {"id":"estrutura-turma","title":"Turma como contexto","description":"A turma selecionada determina aulas, alunos, exercícios e conversas disponíveis. A navegação não oferece uma central completa com todas as turmas juntas.","question":"A convivência deveria ser por turma, por curso ou de toda a escola? O professor precisa acompanhar várias turmas de uma vez?"},
+        {"id":"estrutura-papeis","title":"Troca de papel para testar","description":"Professor/Aluno e a seleção de aluno são controles de demonstração no mesmo navegador. Não representam o acesso real de uma conta.","question":"Na experiência futura, alguém poderá ter mais de um papel? Que ações precisam ser exclusivas do professor?"},
+        {"id":"estrutura-nomes","title":"Vocabulário e quantidade de menus","description":"Usei palavras como estudo, exercício, etapa, acompanhamento, encontro e sketchbook. Aulas e encontros também aparecem com sentidos próximos.","question":"Quais nomes você usa com os alunos? Liste os que confundem ou soam artificiais, com a substituição que prefere."}
+      ],"links":["hoje","atelie","alunos"]
+    },
+    {
+      "id":"hoje","group":"Aluno e sketchbook","title":"Hoje · de onde continuar",
+      "path":"Aluno ou Professor → Hoje.",
+      "purpose":"Apontar o próximo passo sem obrigar a pessoa a procurar em vários lugares.",
+      "current":"A tela reúne prioridades, últimas conversas, aula em foco, exercício em andamento e acesso ao Ateliê. Para o aluno também há um acesso ao personagem.",
+      "assumption":"Dei prioridade às conversas e revisões. A aula e a tarefa em foco dependem da seleção do cenário; o título Hoje não significa uma agenda automaticamente organizada pela data real.",
+      "question":"O que cada pessoa deveria enxergar primeiro? Há informação repetida ou algo essencial que não aparece?",
+      "items":[
+        {"id":"hoje-aluno","title":"Para continuar","description":"No aluno, destaca estudos com mensagens ainda não lidas ou com revisão pedida. Abrir leva à conversa daquele estudo.","question":"Como o aluno deveria perceber uma resposta do professor? Qual seria um bom próximo passo quando não houver respostas novas?"},
+        {"id":"hoje-professor","title":"Pedindo seu olhar","description":"Para o professor, mostra estudos que pedem atenção. Inclui entregas para avaliar e conversas cuja última mensagem é do aluno, até cinco na tela inicial.","question":"Toda nova mensagem deve pedir atenção? Como distinguir dúvida urgente, atualização de processo e agradecimento?"},
+        {"id":"hoje-recentes","title":"Últimas conversas","description":"Mostra até três estudos recentes. Um estudo pode aparecer aqui e também nas prioridades.","question":"Essa repetição ajuda a retomar ou só aumenta o ruído? Prefere outra forma de continuar o trabalho?"},
+        {"id":"hoje-atalhos","title":"Aula, exercício e turma","description":"Consultar aula abre os materiais; participar depende do encontro aberto. O exercício leva ao sketchbook filtrado. Encontrar a turma abre o mapa.","question":"Esses atalhos correspondem à sequência natural da sua aula? O que deveria ser a ação principal?"}
+      ],"links":["conversa","aulas","acompanhamento"]
+    },
+    {
+      "id":"personagem","group":"Aluno e sketchbook","title":"Primeiro acesso e personagem",
+      "path":"Aluno → primeira entrada ou Meu personagem → Criar/Editar personagem.",
+      "purpose":"Receber o aluno com uma identidade própria e manter essa identidade vinculada à matrícula.",
+      "current":"O cadastro tem três etapas: personagem, nickname/objetivo e conta/matrícula simuladas. Há cinco personagens prontos. É possível explorar primeiro e voltar depois.",
+      "assumption":"A direção de criação estilo MMORPG veio de você. Escolher entre cinco modelos, permitir pular e terminar no mapa foram escolhas minhas para a prévia.",
+      "question":"Descreva a chegada ideal de um novo aluno: o que ele já teria feito antes de entrar e o que deveria sentir ou entender no cadastro?",
+      "items":[
+        {"id":"personagem-visual","title":"Escolher o Xuimzinho","origin":"Implementado na prévia","description":"Brasa, Musgo, Maré, Âmbar e Amora são modelos fixos com roupas e detalhes diferentes. Não há um editor separado de cabelo, corpo e acessórios.","question":"Você quer personagens prontos ou montar a aparência por partes? O que é essencial para ter a sensação de criação MMORPG?"},
+        {"id":"personagem-nickname","title":"Nickname e nome de matrícula","description":"O nickname tem de 3 a 24 caracteres e é único nesta prévia. O nome original permanece no cadastro. Algumas listas ainda usam o nome de matrícula, enquanto mapa e conversas usam o nickname.","question":"Qual nome deve aparecer para colegas, para o professor e em cada área? O aluno pode mudar de nickname depois?"},
+        {"id":"personagem-objetivo","title":"Objetivo de desenho","description":"O aluno escreve o que quer aprender. O texto alimenta o perfil e o objetivo pedagógico, sem gerar um plano automaticamente.","question":"Esse é o momento certo para perguntar o objetivo? Precisa de referências, nível de experiência ou outras perguntas?"},
+        {"id":"personagem-entrada","title":"Explorar primeiro / Entrar no ateliê","description":"Explorar primeiro fecha o cadastro e permite navegar. Finalizar salva o personagem e abre o mapa.","question":"O cadastro deve ser obrigatório? O primeiro destino seria uma recepção, apresentação, sketchbook, turma ou algo diferente?"}
+      ],"links":["perfil","conta","percurso-chegada"]
+    },
+    {
+      "id":"perfil","group":"Aluno e sketchbook","title":"Perfil do artista",
+      "path":"Aluno → Meu personagem. Professor → Alunos → nome do aluno.",
+      "purpose":"Reunir a identidade do aluno e o contexto de seu aprendizado.",
+      "current":"O perfil mostra personagem, nickname, nome de matrícula, objetivo, estudos, conclusões, XP, presença e estados simulados de conta/matrícula.",
+      "assumption":"Coloquei dados pedagógicos e administrativos perto da identidade. O perfil atual é próprio/para o professor; não há uma página pública completa para colegas.",
+      "question":"O que deveria estar neste perfil e quem pode ver cada parte? Ele é apresentação social, ficha pedagógica ou ambos?",
+      "items":[
+        {"id":"perfil-identidade","title":"Apresentação do aluno","description":"O personagem e o objetivo aparecem junto ao nome e nickname. Ainda não há biografia social, portfólio escolhido ou capa personalizada.","question":"Que informações deveriam ajudar os colegas a conhecer o aluno? Quais são apenas do professor?"},
+        {"id":"perfil-metricas","title":"Estudos, concluídos, XP e presença","description":"São indicadores numéricos do registro atual. A quantidade de estudos não representa automaticamente qualidade ou evolução artística.","question":"Quais indicadores têm utilidade? O aluno deveria ver números, marcos do processo, comparações de desenhos ou outro formato?"},
+        {"id":"perfil-acoes","title":"Abrir sketchbook / Editar personagem","description":"O aluno pode abrir seu caderno e personalizar o personagem. O professor tem também Ficha pedagógica e Simular vínculo Asaas.","question":"Quais ações você espera ao visitar um perfil? Como deveria voltar ao contexto de onde veio?"},
+        {"id":"perfil-duas-fichas","title":"Perfil e ficha pedagógica separados","description":"A ficha pedagógica ainda abre uma segunda janela com histórico, médias e notas. Isso preservou uma estrutura anterior da plataforma.","question":"Essa separação faz sentido? O que deveria estar junto e o que merece uma área própria?"}
+      ],"links":["alunos","evolucao","conta"]
+    },
+    {
+      "id":"sketchbook","group":"Aluno e sketchbook","title":"Sketchbook · a organização do caderno",
+      "path":"Aluno → Meu sketchbook. Professor → Alunos → Sketchbook de um aluno.",
+      "purpose":"Dar continuidade aos desenhos e às conversas, relacionando a prática com as tarefas.",
+      "current":"O caderno lista conversas por estudo. Tem filtros Exercício, Todo o percurso e Estudos livres. No filtro Exercício, mostra proposta, prazo, ritmo e etapas ao lado dos estudos.",
+      "assumption":"Seu pedido definiu a conversa como essencial. Separar essa conversa em vários estudos, com tarefa e etapa, foi minha proposta. A privacidade atual também é uma escolha minha: aluno e professor.",
+      "question":"Como você imagina o caderno inteiro? Uma conversa contínua do aluno, várias conversas por desenho, páginas semanais, ou outra organização?",
+      "items":[
+        {"id":"sketchbook-filtros","title":"Exercício / Todo o percurso / Estudos livres","description":"Exercício mostra a tarefa selecionada; Todo o percurso reúne os estudos do aluno; Estudos livres mostra os que não têm tarefa vinculada.","question":"Essa divisão ajuda? Prefere semana, assunto, curso, projeto ou uma linha do tempo única?"},
+        {"id":"sketchbook-proposta","title":"Proposta sempre ao lado","description":"A tarefa exibe orientação, prazo, etapas e acesso à aula de origem. O seletor permite consultar exercícios anteriores.","question":"O que o aluno precisa rever enquanto desenha? Como deveriam aparecer tarefas atrasadas ou de semanas passadas?"},
+        {"id":"sketchbook-lista","title":"Um cartão por estudo","description":"Cada linha mostra título, última mensagem, situação, quantidade de imagens e mensagens. Abrir leva ao histórico daquele estudo.","question":"Você reconheceria rapidamente o que está acontecendo com esse aluno? Falta miniatura maior, ordenação, busca ou outro contexto?"},
+        {"id":"sketchbook-privacidade","title":"Quem participa do caderno","description":"A conversa atual é entre o aluno e o professor. Colegas só têm acesso à imagem escolhida para a galeria, dentro da simulação.","question":"No Galdrabok os colegas podiam acompanhar os sketchbooks? O que você quer preservar: observar, comentar, reagir, pedir permissão ou manter privado?"},
+        {"id":"sketchbook-continuidade","title":"Novo estudo ou continuar um existente","description":"Novo estudo cria outra conversa. Abrir conversa em uma etapa retoma um estudo relacionado. Mais de um estudo pode pertencer à mesma etapa.","question":"O aluno saberia quando criar outro estudo? Você precisa agrupar vários desenhos diferentes em uma mesma tarefa ou conversa?"}
+      ],"links":["novo-estudo","conversa","exercicios"]
+    },
+    {
+      "id":"novo-estudo","group":"Aluno e sketchbook","title":"Começar um estudo",
+      "path":"Sketchbook → Novo estudo ou Começar estudo em uma etapa.",
+      "purpose":"Permitir que um aluno comece pelo que está fazendo ou pela dificuldade, mesmo sem arte pronta.",
+      "current":"O formulário pede exercício ou estudo livre, etapa quando há tarefa, nome do estudo, mensagem inicial e intenção. A imagem é adicionada depois que a conversa abre.",
+      "assumption":"Criei um pequeno formulário para organizar o vínculo antes da primeira postagem. Isso pode ser burocracia demais para alguém que só quer mandar uma foto e perguntar.",
+      "question":"Qual seria a maneira mais natural de trazer uma dúvida ou desenho novo? Descreva o mínimo que o aluno precisaria fazer.",
+      "items":[
+        {"id":"novo-estudo-vinculo","title":"Exercício e etapa","description":"Quando começa por uma etapa, o formulário já traz esse contexto. Também é possível escolher a tarefa ou fazer um estudo livre.","question":"Esse vínculo deveria ser automático? Um desenho pode responder a mais de uma etapa ou tarefa?"},
+        {"id":"novo-estudo-titulo","title":"Nome do estudo","description":"O título é obrigatório; a etapa pode preencher uma sugestão. Ele identifica a conversa nas listas.","question":"O aluno precisa dar um nome ou o sistema deveria sugerir algo com base na tarefa/data?"},
+        {"id":"novo-estudo-mensagem","title":"Começar com texto ou dúvida","description":"Pode abrir sem imagem. O formulário oferece Compartilhar meu processo e Pedir ajuda ao professor; se não houver texto, insere uma frase padrão.","question":"Essa escolha é necessária? O aluno deveria poder enviar texto e imagem juntos já na primeira ação?"},
+        {"id":"novo-estudo-professor","title":"Professor também pode iniciar","description":"Na prévia, o professor pode começar uma conversa de estudo no caderno do aluno selecionado.","question":"Isso corresponde à sua prática? Em que situações você iniciaria um estudo ou comentário para um aluno?"}
+      ],"links":["sketchbook","conversa"]
+    },
+    {
+      "id":"conversa","group":"Aluno e sketchbook","title":"Conversa durante o desenho",
+      "path":"Sketchbook, Hoje ou Acompanhamento → abrir um estudo.",
+      "purpose":"Manter desenho, dúvida, orientação e novas tentativas no mesmo contexto.",
+      "current":"A imagem e suas versões ficam de um lado; o histórico e a caixa de mensagem ficam do outro. No celular, as partes ficam empilhadas. O professor pode responder imediatamente sem dar nota.",
+      "assumption":"Usei uma conversa por estudo e opções explícitas de intenção. Essa estrutura precisa ser validada com a forma como seus alunos realmente conversam.",
+      "question":"Imagine um aluno dizendo “estou preso nisso”. Como você gostaria de ver, responder e acompanhar essa conversa até ele conseguir continuar?",
+      "items":[
+        {"id":"conversa-historico","title":"Histórico de mensagens","description":"Mensagens de aluno e professor, imagens, pedidos de ajuda e avaliações aparecem em sequência. Não há respostas encadeadas por mensagem, reações, áudio ou edição de mensagens implementados.","question":"O que é indispensável para uma conversa natural? Você precisa responder a uma imagem específica ou citar uma mensagem?"},
+        {"id":"conversa-intencao","title":"O aluno escolhe a intenção","description":"Compartilhar processo, Pedir ajuda, Entregar para avaliação e Dúvida resolvida mudam o significado da postagem e a situação do estudo.","question":"Essas quatro opções fazem sentido? Quais deveriam ser botões, acontecer automaticamente ou nem existir?"},
+        {"id":"conversa-resposta","title":"Professor: Responder ou Orientar próximo passo","description":"Uma resposta comum não exige avaliação. Orientar próximo passo sinaliza revisão; a avaliação formal fica em outra ação.","question":"Você diferenciaria esses dois tipos de mensagem? O texto por si só já deveria ser suficiente?"},
+        {"id":"conversa-anexos","title":"Imagens e rascunho","description":"Aceita PNG, JPEG e WebP, uma imagem por envio. Texto, intenção e imagem preparados na conversa ficam em rascunho local. O professor também pode anexar uma referência.","question":"Precisa de várias fotos de uma vez, vídeo, áudio, arquivo de desenho ou comparação lado a lado? Como costuma orientar hoje?"},
+        {"id":"conversa-situacao","title":"Situação e leitura","description":"O estudo pode estar em processo, pedindo ajuda, entregue, em revisão ou concluído. Abrir a conversa registra suas mensagens como lidas nesta prévia.","question":"Quais situações seriam úteis? Como indicar que você viu, pretende responder depois ou já respondeu sem encerrar o assunto?"}
+      ],"links":["versoes","correcao","acompanhamento","percurso-duvida"]
+    },
+    {
+      "id":"versoes","group":"Aluno e sketchbook","title":"Versões, entrega e conclusão",
+      "path":"Dentro de uma conversa de estudo → imagens V1/V2 e intenção da mensagem.",
+      "purpose":"Registrar como o desenho muda sem perder o caminho feito até ali.",
+      "current":"Cada nova imagem enviada pelo aluno na mesma conversa vira uma versão numerada. A entrega para avaliação é explícita e exige imagem. A conclusão formal acontece na avaliação do professor.",
+      "assumption":"Tratei toda imagem do aluno como versão do mesmo desenho. Isso não contempla bem fotos de detalhe, referências ou vários desenhos diferentes na mesma postagem.",
+      "question":"O que uma nova imagem costuma significar na sua aula? Como distinguir atualização, detalhe, referência e outro exercício sem complicar o envio?",
+      "items":[
+        {"id":"versoes-selecao","title":"V1, V2 e imagem principal","description":"As miniaturas permitem escolher uma versão antiga. Ao reabrir a conversa, a imagem principal volta para a mais recente.","question":"Você precisa comparar antes/depois ao mesmo tempo? Que versão deveria aparecer quando volta para uma dúvida antiga?"},
+        {"id":"versoes-entrega","title":"Entregar para avaliação","description":"É uma intenção selecionada antes de enviar. Coloca o estudo na lista Para avaliar; não bloqueia novas mensagens.","question":"Existe esse momento formal na sua rotina? O professor avalia todas as tarefas ou o aluno solicita uma avaliação quando precisa?"},
+        {"id":"versoes-resolvida","title":"Dúvida resolvida","description":"O aluno pode avisar que conseguiu continuar. Resolver uma dúvida e concluir formalmente o estudo são situações diferentes no modelo atual.","question":"Quem deveria dizer que a dúvida foi resolvida? Você precisa dessa sinalização ou prefere deixar a conversa livre?"},
+        {"id":"versoes-fim","title":"Quando um estudo termina","description":"O professor pode pedir revisão ou concluir o estudo na avaliação. O histórico permanece disponível para novas mensagens.","question":"O desenho precisa ter um fim definido no sistema? E se o aluno abandonar, retomar meses depois ou avançar para outra tarefa?"}
+      ],"links":["avaliacao","galeria","conversa"]
+    },
+    {
+      "id":"aulas","group":"Aulas e professor","title":"Aulas · calendário e consulta",
+      "path":"Aluno ou Professor → Aulas.",
+      "purpose":"Localizar encontros, propostas e materiais da turma.",
+      "current":"Reúne uma faixa de exercícios e um calendário mensal com encontros. Há seleção de dia, lista do mês e detalhes da aula. O professor pode adicionar e editar encontros.",
+      "assumption":"Coloquei planejamento, histórico de encontros e exercícios na mesma área. O calendário usa a data do cenário do protótipo, não acompanha automaticamente a semana real.",
+      "question":"Ao clicar em Aulas, o que aluno e professor deveriam encontrar primeiro: próxima aula, histórico, materiais, calendário ou outra coisa?",
+      "items":[
+        {"id":"aulas-calendario","title":"Calendário e encontros do mês","description":"Setas mudam o mês, clicar no dia filtra a lista e Mês do cenário volta ao período de demonstração.","question":"Essa visão mensal é útil? Como você organiza aulas semanais, reposições, monitorias e pausas?"},
+        {"id":"aulas-detalhe","title":"Detalhes / Abrir na sala","description":"Os detalhes mostram data, horário, duração, módulo e descrição. Abrir na sala consulta a aula; participar de um encontro é uma ação posterior.","question":"Como o aluno deveria reconhecer aula ao vivo, material disponível e aula passada? Os nomes atuais explicam isso?"},
+        {"id":"aulas-exercicios","title":"Exercícios no topo","description":"Lista tarefas vinculadas às aulas, com prazo e Abrir estudos. O professor também pode editar e publicar exercícios.","question":"Onde é mais natural encontrar a tarefa da semana? Essa faixa duplica o que deveria estar no sketchbook?"},
+        {"id":"aulas-planejar","title":"Adicionar / Editar encontro","description":"O professor preenche título, tipo, data, horário, duração, módulo, descrição, nota interna e conclusão. Extras, monitorias e pausas não avançam a numeração regular.","question":"Quais campos você realmente usa? Precisa de recorrência, reagendamento em conjunto ou outra relação entre curso, módulo e aula?"},
+        {"id":"aulas-concluir","title":"Concluir no calendário e encerrar ao vivo","description":"Marcar como concluído no calendário e encerrar a sessão simulada são ações distintas. Isso pode deixar duas situações diferentes para a mesma aula.","question":"O que encerrar uma aula deveria fazer automaticamente? Quais registros você gostaria de conferir depois?"}
+      ],"links":["sala","exercicios","presenca"]
+    },
+    {
+      "id":"sala","group":"Aulas e professor","title":"Sala de aula e materiais",
+      "path":"Aulas → detalhes → Abrir na sala, ou Hoje → Consultar aula.",
+      "purpose":"Oferecer um lugar para explicar desenho, consultar referências e conversar sobre a aula.",
+      "current":"A sala reúne prancha de desenho, referências/materiais, participantes e conversa da aula. O professor pode iniciar ou encerrar o encontro simulado; o aluno só participa quando há um encontro aberto.",
+      "assumption":"Adaptei uma sala de chamada com prancha integrada. Ainda não definimos como você realmente pretende transmitir o desenho, compartilhar a tela ou alternar entre explicar e corrigir.",
+      "question":"Descreva como você dá uma aula ao vivo: o que está na sua tela, o que os alunos veem e como eles interrompem ou participam?",
+      "items":[
+        {"id":"sala-prancha","title":"Prancha e ferramentas","description":"Permite traçar sobre uma referência e usar ferramentas de desenho, desfazer e limpar. A prancha tem armazenamento por aula no navegador; não é um canvas colaborativo em rede.","question":"Você desenharia aqui ou compartilharia seu programa habitual? Que ferramentas seriam realmente necessárias dentro da plataforma?"},
+        {"id":"sala-materiais","title":"Referências e materiais","description":"A prévia oferece imagens do acervo e importação local para testar a prancha. Não há uma biblioteca completa de gravações, documentos e materiais organizada pelo professor.","question":"Que materiais acompanham suas aulas? Como deveriam ficar disponíveis antes, durante e depois?"},
+        {"id":"sala-chamada","title":"Microfone, câmera, mão e compartilhamento","description":"Os controles representam estados da chamada. Áudio, vídeo e compartilhamento de tela não são transmitidos entre computadores.","question":"Você precisa de vídeo de todos, voz por grupos, aluno compartilhando tela, fila de dúvidas ou pedir a palavra?"},
+        {"id":"sala-chat","title":"Conversa da aula","description":"Cada aula tem seu histórico de texto. Quem participa pelo mapa e abre essa mesma aula acessa o mesmo contexto de conversa no cenário local.","question":"Essa conversa deve continuar depois da aula? Como uma dúvida do chat vira acompanhamento no sketchbook sem ser perdida?"},
+        {"id":"sala-exercicio","title":"Da explicação para o desenho do aluno","description":"O atalho de tarefa abre o sketchbook associado. A correção privada de estudo usa uma tela própria, não a prancha da turma.","question":"Como você escolheria uma arte para demonstrar algo coletivamente? É preciso combinar com o aluno e registrar o feedback no caderno?"}
+      ],"links":["correcao","espacos","percurso-aula"]
+    },
+    {
+      "id":"exercicios","group":"Aulas e professor","title":"Exercícios e ritmos de prática",
+      "path":"Professor → Aulas → Publicar exercício / Editar. Aluno → Sketchbook → Exercício.",
+      "purpose":"Fazer a proposta da semana chegar ao caderno com contexto suficiente para praticar e pedir ajuda.",
+      "current":"O professor escolhe aula de origem, título, orientação, prazo e etapas. Define quantas etapas aparecem em cada ritmo. Publicar disponibiliza a tarefa nos sketchbooks da turma.",
+      "assumption":"A ligação orgânica com o sketchbook foi pedida por você. A exigência de uma aula de origem, a divisão em etapas e a quantidade crescente por ritmo são regras da implementação a revisar.",
+      "question":"Como você prepara e passa uma tarefa hoje? Dê um exemplo de tarefa real, incluindo variações entre alunos, se existirem.",
+      "items":[
+        {"id":"exercicios-contexto","title":"Aula de origem e prazo","description":"Uma tarefa precisa estar ligada a um encontro que não seja pausa, e o prazo não pode ser anterior a ele. Estudos livres não precisam de tarefa.","question":"Existem desafios independentes de aula, tarefas contínuas, várias semanas ou sem prazo?"},
+        {"id":"exercicios-etapas","title":"Etapas de prática","description":"Cada etapa é um objetivo textual. O aluno pode abrir uma conversa já vinculada a ela. Não há editor completo de anexos ou referências por etapa.","question":"Etapa significa desenho separado, parte do mesmo desenho ou nível de desafio? Que orientações e imagens precisa conter?"},
+        {"id":"exercicios-ritmos","title":"Aventureiro, Herói e Mercenário","description":"Os três ritmos determinam quantas etapas da mesma lista aparecem. Hoje eles mudam quantidade de prática, não a natureza da tarefa.","question":"Esses nomes e essa regra correspondem ao Galdrabok? Ritmo deveria indicar carga, dificuldade, disponibilidade ou algo diferente?"},
+        {"id":"exercicios-publicar","title":"Publicar e atualizar nos sketchbooks","description":"Salvar torna o exercício disponível para a turma no mesmo cenário. Não há uma etapa de rascunho, publicação agendada nem histórico de mudanças do enunciado.","question":"Você prepara com antecedência? O que deveria acontecer quando muda uma tarefa que os alunos já começaram?"},
+        {"id":"exercicios-individual","title":"Adaptação para cada aluno","description":"O ritmo pode mudar por aluno/tarefa; o enunciado e as etapas são compartilhados. Não há um plano individual completo.","question":"Você dá tarefas individuais ou adapta a proposta durante o feedback? Como isso deve se conectar à tarefa da turma?"}
+      ],"links":["sketchbook","evolucao","percurso-aula"]
+    },
+    {
+      "id":"acompanhamento","group":"Aulas e professor","title":"Acompanhamento do professor",
+      "path":"Professor → Acompanhamento.",
+      "purpose":"Reunir conversas que precisam da atenção do professor sem exigir que ele abra todos os cadernos.",
+      "current":"Lista os estudos da turma com filtros Pedindo seu olhar, Dúvidas, Para avaliar e Todos os estudos. Abrir um item leva à conversa original.",
+      "assumption":"Considerei entregas e novas mensagens dos alunos como motivos de atenção. A fila ainda não representa prioridades pedagógicas definidas por você.",
+      "question":"Quando você abre a plataforma para acompanhar a turma, como decide por quem começar e quando considera um caso atendido?",
+      "items":[
+        {"id":"acompanhamento-fila","title":"Pedindo seu olhar","description":"A lista inclui estudos enviados para avaliação e estudos cuja última postagem é do aluno, salvo algumas situações de conclusão. Uma simples atualização pode entrar na fila.","question":"Que eventos devem realmente chamar sua atenção? Precisa de marcar para depois, prioridade manual ou responsável?"},
+        {"id":"acompanhamento-filtros","title":"Dúvidas / Para avaliar / Todos","description":"Dúvidas corresponde à situação de pedido de ajuda. Para avaliar corresponde à entrega explícita. A ordenação usa atualização recente.","question":"Você preferiria os mais antigos primeiro? Precisa filtrar por aluno, tarefa, semana ou várias turmas?"},
+        {"id":"acompanhamento-resolver","title":"Abrir não é responder","description":"Abrir registra leitura. Responder ou orientar altera a situação da conversa; apenas ler não garante que o estudo saia da fila.","question":"Como você separaria visto, em atendimento, esperando aluno e resolvido? Quem deveria enxergar esses estados?"},
+        {"id":"acompanhamento-contexto","title":"Ir ao estudo com o contexto","description":"Na conversa ficam a arte, versões e proposta. O perfil completo e o restante do caderno ficam em outros acessos.","question":"O que você precisa ver sem sair da resposta: histórico de dificuldades, tarefa, presença, objetivo ou trabalhos anteriores?"}
+      ],"links":["conversa","correcao","avaliacao"]
+    },
+    {
+      "id":"correcao","group":"Aulas e professor","title":"Orientação visual no desenho",
+      "path":"Professor → conversa de estudo com imagem → Anotar no desenho.",
+      "purpose":"Permitir uma orientação visual que volte para o mesmo histórico do aluno.",
+      "current":"Abre a versão selecionada em uma prancha de correção. O professor pode desenhar em vermelho ou azul, desfazer traços, escrever uma explicação e enviar uma imagem anotada à conversa.",
+      "assumption":"Separei a correção individual da prancha de aula e preservei o original. As ferramentas disponíveis são apenas um começo.",
+      "question":"Como você costuma corrigir visualmente? O que essa tela precisa permitir para ser mais prática que seu processo atual?",
+      "items":[
+        {"id":"correcao-versao","title":"Escolher a imagem que será corrigida","description":"Usa a versão selecionada na conversa, ou a mais recente. A orientação fica ligada àquela imagem.","question":"Precisa recortar, ampliar uma região, comparar versões ou corrigir várias imagens juntas?"},
+        {"id":"correcao-ferramentas","title":"Traço e explicação","description":"Há duas cores, desfazer e um campo de texto. Ainda não há camadas, formas, borracha avançada, vídeo de correção ou gravação de voz.","question":"Que ferramentas você usaria em uma correção rápida e quais só atrapalhariam?"},
+        {"id":"correcao-envio","title":"Enviar orientação visual","description":"Gera uma imagem com os traços e a coloca como mensagem do professor. A imagem original do aluno continua preservada.","question":"O aluno deveria poder alternar as marcações sobre o original ou uma imagem separada é suficiente?"},
+        {"id":"correcao-publico","title":"Correção individual e demonstração coletiva","description":"Enviar a correção não a leva à galeria nem à prancha da aula. A transição para demonstrar esse estudo à turma ainda não tem um fluxo completo.","question":"Como deveria funcionar uma correção ao vivo para todos? O registro precisaria retornar automaticamente ao sketchbook?"}
+      ],"links":["conversa","sala","avaliacao"]
+    },
+    {
+      "id":"avaliacao","group":"Aulas e professor","title":"Avaliação formal",
+      "path":"Professor → conversa de estudo → Avaliar estudo.",
+      "purpose":"Registrar uma avaliação quando isso fizer parte da proposta pedagógica.",
+      "current":"Exige uma imagem. Avalia a versão mais recente, pede notas de 1 a 3 em três critérios, uma orientação, um próximo passo e XP. O registro aparece na conversa.",
+      "assumption":"Notas, critérios fixos, XP e a própria necessidade de avaliação formal não foram definidos em detalhe por você. São escolhas herdadas da primeira construção e merecem revisão.",
+      "question":"Você usa avaliação estruturada? Explique como reconhece evolução e decide orientar, revisar ou considerar uma tarefa concluída.",
+      "items":[
+        {"id":"avaliacao-criterios","title":"Construção, valores e clareza","description":"Esses três critérios usam 1: Em construção, 2: Desenvolvendo, 3: Consistente. Não mudam automaticamente de acordo com a tarefa.","question":"Faz sentido ter notas? Quais critérios variam por exercício e como você gostaria de expressar a avaliação?"},
+        {"id":"avaliacao-maisrecente","title":"Qual imagem é avaliada","description":"A avaliação formal usa a versão mais recente, mesmo que uma miniatura antiga esteja selecionada. A anotação visual, por sua vez, usa a versão selecionada.","question":"Como escolher a versão ou conjunto de desenhos avaliado? Essa diferença deveria desaparecer?"},
+        {"id":"avaliacao-proximopasso","title":"Pedir revisão / Concluir estudo","description":"A avaliação pede uma dessas opções e publica a orientação no histórico. Isso altera a situação atual do estudo.","question":"O resultado precisa ser binário assim? O aluno pode avançar na tarefa e continuar melhorando o mesmo desenho?"},
+        {"id":"avaliacao-xp","title":"XP na avaliação","description":"O formulário aceita de 0 a 200 XP em passos de 10, com sugestão inicial de 60. São valores escolhidos para a demonstração.","question":"O XP deve existir aqui? Ele recompensa o quê: presença, esforço, entrega, evolução ou outra coisa?"}
+      ],"links":["evolucao","versoes","conversa"]
+    },
+    {
+      "id":"alunos","group":"Aulas e professor","title":"Alunos, turmas e ficha pedagógica",
+      "path":"Professor → Alunos → nome do aluno / Turmas / Matricular aluno.",
+      "purpose":"Encontrar cada aluno com seu contexto e administrar a organização da turma.",
+      "current":"Há busca pelo nome de matrícula, filtros de situação, indicadores, atalhos para sketchbooks e gestão de turmas. Abrir o aluno mostra o perfil; Ficha pedagógica abre o histórico e notas.",
+      "assumption":"Mantive uma área administrativa própria e uma ficha adicional. Ainda precisamos definir como cadastro real, acompanhamento e identidade social se encontram sem duplicar trabalho.",
+      "question":"Que informações e ações você precisa ter à mão para cuidar de uma turma? O que está espalhado ou misturado demais?",
+      "items":[
+        {"id":"alunos-lista","title":"Buscar, filtrar e abrir o aluno","description":"A lista mostra jornada/XP, presença, quantidade de estudos e sinal de acompanhamento. Filtra matrículas ativas, arquivadas, todas ou que pedem acompanhamento.","question":"Como você procuraria alguém: nickname, nome, turma, dificuldade? Esses indicadores ajudam a agir?"},
+        {"id":"alunos-matricula","title":"Matricular / Editar ficha","description":"Preenche nome, e-mail opcional, data, ritmo, situação e objetivo. Não envia convite. Arquivar conserva o registro local.","question":"Quais dados deveriam vir de Google/Asaas e quais você precisa editar? O que deve acontecer ao pausar, sair ou retornar?"},
+        {"id":"alunos-turmas","title":"Criar e editar turmas","description":"Cada turma tem nome, curso, professor e descrição. A prévia organiza seus registros separadamente.","question":"Curso e turma são coisas distintas no seu método? Precisa mover alunos preservando o caderno e reunir pessoas de turmas diferentes?"},
+        {"id":"alunos-nota","title":"Acompanhamento do professor na ficha","description":"É uma nota salva na ficha do aluno. Ela não é enviada como mensagem na conversa de um estudo.","question":"Isso deveria ser uma anotação interna, um plano combinado com o aluno ou uma mensagem? Como deixar essa diferença clara?"},
+        {"id":"alunos-historico","title":"Histórico pedagógico","description":"Reúne médias de critérios, últimas presenças, objetivo e trabalhos com imagem. Partes dessa ficha ainda usam a estrutura anterior de entregas e não mostram todo estudo iniciado só por texto.","question":"Que história essa tela deveria contar sobre o aluno? Como integrar as conversas e dificuldades que ainda não viraram desenhos?"}
+      ],"links":["perfil","presenca","evolucao","conta"]
+    },
+    {
+      "id":"presenca","group":"Aulas e professor","title":"Presença e agenda do professor",
+      "path":"Professor → detalhes de uma aula → Registrar presença; ou Alunos → Presença & relatórios.",
+      "purpose":"Ajudar o professor a perceber a participação e manter registros úteis.",
+      "current":"A chamada é manual: presente, ausente, justificada ou não registrada. Há marcar todos presentes, limpar seleção e concluir encontro ao salvar.",
+      "assumption":"Usei apenas aulas regulares concluídas no percentual. Presenças de extras e monitorias são registradas separadamente. Estar no mapa não lança presença automaticamente.",
+      "question":"O que significa participação na sua escola? Como você trata atrasos, gravações, justificativas e alunos que estudam em outro horário?",
+      "items":[
+        {"id":"presenca-chamada","title":"Registro manual","description":"A lista considera alunos matriculados até a data do encontro. Marcar todos e limpar seleção afetam o formulário antes de salvar.","question":"Você quer chamada manual, sugestão por entrada na sala ou outra forma? O que precisaria conferir antes de validar?"},
+        {"id":"presenca-calculo","title":"Percentual de presença","description":"Aulas regulares concluídas e com registro entram no cálculo; justificativas são excluídas do denominador. Extras e monitorias não entram nesse percentual.","question":"Essa regra faz sentido? Presença precisa de percentual ou é mais útil um histórico de contexto e contato?"},
+        {"id":"presenca-mapa","title":"Mapa das últimas aulas","description":"O relatório mostra aluno por aula, até oito aulas regulares concluídas, com acesso para editar a chamada.","question":"Esse histórico ajuda a perceber uma necessidade de apoio? Qual período e que sinais importam?"}
+      ],"links":["aulas","evolucao","espacos"]
+    },
+    {
+      "id":"evolucao","group":"Aulas e professor","title":"Evolução, XP e relatórios",
+      "path":"Professor → Alunos → Presença & relatórios; também nos perfis.",
+      "purpose":"Transformar registros em contexto para orientar o aluno.",
+      "current":"Mostra presença, estudos com imagem, avaliações, médias por fundamento e uma lista ordenada por XP. O perfil também exibe níveis e indicadores.",
+      "assumption":"Os números, médias, nível a cada 300 XP e ordenação de alunos são escolhas minhas. Não demonstram, por si só, o tipo de evolução que você pretende acompanhar.",
+      "question":"Como você percebe e comunica a evolução de um artista? O que do Galdrabok é essencial preservar e o que precisa mudar?",
+      "items":[
+        {"id":"evolucao-metricas","title":"Quantidade de estudos e avaliações","description":"O relatório usa trabalhos com imagem agrupados por estudo. Estudos iniciados apenas por texto aparecem nos cadernos, mas não em todos os indicadores antigos.","question":"O que merece ser contado? Como evitar que uma métrica esconda processo, dúvidas ou tentativas importantes?"},
+        {"id":"evolucao-medias","title":"Média dos fundamentos","description":"Resume as notas de construção, valores e clareza. Mistura avaliações de trabalhos diferentes em uma média.","question":"Uma média faz sentido entre propostas distintas? Prefere evolução no tempo, exemplos visuais ou observações pedagógicas?"},
+        {"id":"evolucao-niveis","title":"XP e níveis","description":"A regra atual soma a base do cenário, avaliações e registros de prática. Há estruturas herdadas que precisam ser alinhadas com o novo modelo de conversa.","question":"Qual seria a regra de progressão? O que o nível muda para o aluno, além de um número?"},
+        {"id":"evolucao-ranking","title":"Ritmos e conquistas: lista por XP","description":"O relatório do professor ordena os alunos por XP. Não há um sistema completo de conquistas visuais ou desbloqueios.","question":"Você quer comparação entre alunos? Como motivar sem transformar ritmo pessoal em competição indesejada?"},
+        {"id":"evolucao-acao","title":"Do relatório para uma ação","description":"É possível abrir perfis e chamadas. Ainda não há um fluxo completo de combinar metas, acompanhar acordos e revisar um plano individual.","question":"Depois de notar uma dificuldade, o que você faz? Que ação a plataforma deveria facilitar nesse momento?"}
+      ],"links":["perfil","avaliacao","alunos"]
+    },
+    {
+      "id":"atelie","group":"Ateliê e convivência","title":"Ateliê · mapa e deslocamento",
+      "path":"Aluno ou Professor → Ateliê.",
+      "purpose":"Dar à turma a sensação de compartilhar um lugar para aprender e desenhar.",
+      "current":"O estúdio 2D visto de cima tem sala de aula, mesas, galeria e café. Há avatares, movimento por clique/teclado, atalhos de destino e um painel do espaço atual.",
+      "assumption":"Você escolheu a direção próxima do Gather. A planta, os quatro espaços e o papel do mapa como uma aba foram propostas minhas. Pessoas e proximidade continuam simuladas.",
+      "question":"Qual é o papel do ateliê no dia a dia? Ele deve ser o lugar principal onde tudo acontece, um modo social opcional ou outra coisa?",
+      "items":[
+        {"id":"atelie-movimento","title":"Andar e chegar a um espaço","description":"Clique no chão, setas/WASD, controles na tela e botões de destino movem o avatar. Escape interrompe o caminho.","question":"Quando andar faz parte da experiência e quando um acesso direto é melhor? Alguém no celular deve poder participar sem navegar pelo mapa?"},
+        {"id":"atelie-planta","title":"Sala, mesas, galeria e café","description":"A planta e os móveis são fixos. O painel lateral muda conforme a área e oferece uma ação relacionada.","question":"Esses ambientes correspondem a atividades reais da escola? Que espaço falta ou está sobrando?"},
+        {"id":"atelie-pessoas","title":"Avatares e pessoas neste espaço","description":"Os personagens representam pessoas do cenário. O painel usa o grupo/espaço; o círculo desenhado ao redor do avatar ainda sugere proximidade, sem áudio real.","question":"Como você quer descobrir quem está disponível, estudando, conversando ou pedindo ajuda? Proximidade física deve ter efeito na conversa?"},
+        {"id":"atelie-controles","title":"Zoom, localizar, estado e acenar","description":"Há controles de visualização, localização do avatar, estado de atividade e uma animação de aceno. Esses recursos não enviam presença real para outros dispositivos.","question":"Quais interações tornam a convivência útil? Quais são apenas decoração ou ruído?"},
+        {"id":"atelie-professor","title":"Abrir encontro da turma","description":"O professor pode iniciar o encontro a partir do mapa. Os alunos entram na sala pela participação simulada; não existe uma chamada de rede.","question":"O professor convida, chama a atenção de todos ou move a turma? O aluno deve aceitar antes de participar?"}
+      ],"links":["espacos","galeria","percurso-aula"]
+    },
+    {
+      "id":"espacos","group":"Ateliê e convivência","title":"Mesas, sala e continuidade",
+      "path":"Ateliê → mesas/sala/café; depois abrir sketchbook ou outro menu.",
+      "purpose":"Permitir consultar e desenhar sem perder as pessoas com quem está participando.",
+      "current":"Há duas mesas selecionáveis e conversas por espaço. A faixa de participação permite voltar ao mapa, conversar ou sair. Estar em uma mesa pode continuar ao abrir o sketchbook.",
+      "assumption":"Tratei participação no espaço e tela aberta como coisas separadas. Ainda precisamos decidir o que o grupo compartilha quando cada aluno abre seu próprio trabalho.",
+      "question":"Imagine três alunos desenhando na mesma mesa: o que cada um vê e ouve? Como o professor se aproxima e ajuda sem interromper toda a turma?",
+      "items":[
+        {"id":"espacos-mesas","title":"Sentar na mesa 1 ou 2","description":"As mesas têm grupos de conversa próprios. Abrir meu sketchbook mantém a participação no grupo nesta simulação.","question":"As mesas são livres, permanentes, por tarefa ou criadas pelos alunos? Pode haver limites e mesas reservadas?"},
+        {"id":"espacos-faixa","title":"Faixa de participação","description":"Mostra o lugar atual e oferece conversa, retorno ao mapa e saída. A intenção é manter contexto enquanto outra tela está aberta.","question":"Essa faixa comunica bem onde você está? Que controles precisam continuar visíveis enquanto desenha ou responde?"},
+        {"id":"espacos-visibilidade","title":"Seu sketchbook aberto na mesa","description":"Abrir o caderno não mostra automaticamente o desenho aos colegas. A conversa de estudo e a conversa da mesa permanecem separadas.","question":"Você espera que os colegas vejam o desenho ao sentar juntos? Como compartilhar, comentar e guardar uma orientação dada ali?"},
+        {"id":"espacos-sala","title":"Consultar aula estando em outro espaço","description":"É possível consultar materiais sem entrar no encontro. A conversa da aula consultada pode ser diferente da conversa do lugar em que a pessoa continua participando.","question":"Como mostrar esses dois contextos sem confundir? Consultar aula deveria manter a mesa ou mudar alguma coisa?"},
+        {"id":"espacos-sair","title":"Sair do espaço","description":"A ação encerra a participação local no grupo. Ela não apaga estudos ou mensagens.","question":"O que deve acontecer ao sair, ficar ausente, fechar a página ou perder conexão na versão futura?"}
+      ],"links":["conversas","sala","sketchbook"]
+    },
+    {
+      "id":"conversas","group":"Ateliê e convivência","title":"Conversas e avisos",
+      "path":"Menu secundário → Conversas / Avisos da turma; ou Conversar aqui no mapa.",
+      "purpose":"Dar lugar às trocas da turma e aos comunicados sem perder orientações importantes.",
+      "current":"Conversas abre o histórico do espaço em que você participa ou o geral da turma. Avisos da turma mostra textos derivados da aula e da tarefa selecionadas.",
+      "assumption":"Separei conversa de estudo, de aula e de espaço. O mural atual não é um editor completo de anúncios, e não há um sistema completo de canais configuráveis como no Discord.",
+      "question":"Quais conversas precisam existir? Como evitar que uma orientação se perca porque foi dada no lugar errado?",
+      "items":[
+        {"id":"conversas-contexto","title":"O botão Conversas muda com o lugar","description":"Participando da mesa, abre a mesa; participando de aula, abre aquela aula; fora de um grupo, abre a turma.","question":"Essa mudança é previsível? Prefere uma lista fixa de conversas, canais e mensagens recentes?"},
+        {"id":"conversas-historico","title":"Histórico dos espaços","description":"Mensagens de texto permanecem no cenário por grupo. Não há política real de acesso ao histórico para novos participantes, nem rede entre usuários.","question":"Quem pode ler a conversa antiga de uma mesa? A mesa deve guardar memória ou ser uma conversa temporária?"},
+        {"id":"conversas-avisos","title":"Mural da turma","description":"Reapresenta informações de aula e exercício com atalhos. Não permite escrever, fixar e programar comunicados independentes.","question":"O que você publicaria em um mural? Precisa de avisos gerais da escola, por turma, confirmação de leitura ou comentários?"},
+        {"id":"conversas-canais","title":"Canais, mensagem direta e notificação","description":"Canais livres, mensagens diretas, menções e uma central completa de notificações ainda não têm fluxo implementado. Existem contagens de mensagens nos estudos.","question":"Quais dessas formas de comunicação são necessárias? O que precisa avisar o aluno e o que pode esperar pela próxima entrada?"}
+      ],"links":["conversa","espacos","hoje"]
+    },
+    {
+      "id":"galeria","group":"Ateliê e convivência","title":"Galeria da turma",
+      "path":"Conversa de estudo → Compartilhar na galeria; Ateliê → Galeria.",
+      "purpose":"Permitir compartilhar uma imagem com a turma a partir do processo no sketchbook.",
+      "current":"Escolhe uma versão, mostra uma prévia e publica a imagem. A conversa permanece no estudo. É possível retirar a publicação. A galeria atual exibe até três imagens.",
+      "assumption":"Usei publicação explícita e uma imagem por estudo. Isso não define ainda se a galeria é exposição, portfólio, mural social ou seleção do professor.",
+      "question":"Para que você quer a galeria? Como ela se diferencia de visitar o sketchbook de alguém?",
+      "items":[
+        {"id":"galeria-escolha","title":"Escolher o que expor","description":"A publicação guarda a versão escolhida naquele momento. Novas versões enviadas ao estudo não atualizam automaticamente a imagem exposta.","question":"Compartilhar processo inacabado é bem-vindo? A imagem exposta deveria acompanhar o desenho ou ser uma seleção fixa?"},
+        {"id":"galeria-permissao","title":"Quem publica e retira","description":"Aluno e professor têm a ação para os estudos a que têm acesso na prévia. Não há um pedido de autorização do aluno implementado para publicação pelo professor.","question":"Quem deve decidir o que fica público? Precisa de convite, curadoria, aprovação ou indicação do professor?"},
+        {"id":"galeria-exposicao","title":"Ver a galeria","description":"O mapa e a janela de galeria mostram um pequeno conjunto de imagens, com título, autor e versão. Não há paginação ou acervo completo.","question":"Como organizar muitas artes: por semana, turma, artista, tema? O espaço 2D deve ser apenas a entrada para uma visão maior?"},
+        {"id":"galeria-interacao","title":"Conversar sobre a arte exposta","description":"A galeria atual não tem comentários, reações ou conexão de volta ao estudo para colegas.","question":"Que interação você quer incentivar? Quando um comentário deveria voltar para o processo no sketchbook?"}
+      ],"links":["sketchbook","versoes","atelie"]
+    },
+    {
+      "id":"conta","group":"Ateliê e convivência","title":"Conta, matrícula e dados",
+      "path":"Cadastro do personagem / perfil / Guardar uma cópia.",
+      "purpose":"Manter personagem, aluno e matrícula como uma identidade conectada.",
+      "current":"O HTML funciona localmente. Google e Asaas são simulações visuais. Os testes ficam no navegador e uma cópia JSON transporta registros, desenhos e conversas.",
+      "assumption":"A integração futura foi pedida por você. Ainda não definimos a sequência compra → identificação → matrícula → personagem, nem as regras para situações de cobrança.",
+      "question":"Como o aluno chega até a escola, paga e recebe acesso hoje? Descreva essa sequência e o que deveria acontecer automaticamente.",
+      "items":[
+        {"id":"conta-google","title":"Identificação Google","description":"O cadastro permite informar e-mail e simular vínculo. Não autentica, valida identidade nem conecta uma conta Google.","question":"O aluno usará obrigatoriamente Google? Como resolver e-mail de compra diferente do e-mail de acesso?"},
+        {"id":"conta-asaas","title":"Matrícula Asaas","description":"O professor muda um estado demonstrativo: não vinculado, ativo ou pendente. Ele não altera cobrança nem sincroniza a situação da matrícula administrativa.","question":"O que cada situação financeira deve mudar na experiência? Como preservar conversa e histórico quando houver pausa, pendência ou cancelamento?"},
+        {"id":"conta-backup","title":"Guardar uma cópia","description":"Exporta os dados do protótipo. Restaurar substitui os registros locais após confirmação. Este guia tem uma cópia de feedback separada da plataforma.","question":"Na versão futura, que dados você gostaria de exportar ou levar com o aluno? O que precisa permanecer no histórico da escola?"},
+        {"id":"conta-limites","title":"O que é só demonstração","description":"Ainda não há acesso real por conta, permissões de servidor, comunicação entre computadores, chamadas de áudio/vídeo ou sincronização externa.","question":"Qual percurso real será prioritário quando passarmos do HTML para a plataforma?"}
+      ],"links":["personagem","alunos","percurso-chegada"]
+    },
+    {
+      "id":"percurso-duvida","group":"Percursos completos","title":"Aluno trava no desenho",
+      "path":"Leia a sequência e, se quiser, experimente alternando Aluno e Professor na plataforma.",
+      "purpose":"Avaliar se o pedido de ajuda vira orientação e continuidade com pouco esforço.",
+      "current":"Este percurso pode ser experimentado no HTML com os dois papéis no mesmo navegador. Não há recebimento por outra pessoa em outro dispositivo.",
+      "assumption":"A sequência abaixo descreve a proposta atual, não a forma obrigatória de conduzir a aula. Sua correção pode mudar a sequência inteira.",
+      "question":"Conte esse caso como aconteceria com um aluno real seu. Onde a proposta atual faz ele parar para entender a plataforma em vez de desenhar?",
+      "items":[
+        {"id":"duvida-1","title":"1. Encontrar a tarefa","description":"Aluno abre Meu sketchbook, escolhe Exercício e a etapa. A proposta e o acesso à aula ficam ao lado.","question":"O aluno deveria precisar escolher tudo isso ou chegar com o contexto pronto?","links":["sketchbook","exercicios"]},
+        {"id":"duvida-2","title":"2. Dizer “estou preso nisso”","description":"Abre um estudo ou continua uma conversa, escreve e adiciona a imagem inacabada. Seleciona Pedir ajuda e envia.","question":"Quais passos poderiam desaparecer? Como indicar a região específica em que está com dificuldade?","links":["novo-estudo","conversa"]},
+        {"id":"duvida-3","title":"3. Professor encontra e responde","description":"A dúvida aparece em Hoje/Acompanhamento. O professor abre o estudo e responde em texto ou com anotação, sem nota obrigatória.","question":"Como você seria avisado e que contexto precisaria para responder bem?","links":["acompanhamento","correcao"]},
+        {"id":"duvida-4","title":"4. Aluno continua o desenho","description":"Vê a resposta, pode avisar que a dúvida foi resolvida e enviar outra imagem no mesmo estudo. O histórico permanece.","question":"O professor precisa acompanhar essa nova tentativa? Como saber se a orientação ajudou?","links":["versoes"]},
+        {"id":"duvida-5","title":"5. Fechar ou continuar o assunto","description":"Se fizer parte da proposta, o aluno entrega para avaliação. O professor pode concluir ou pedir revisão; compartilhar na galeria é outra decisão.","question":"Essa etapa final existe na sua rotina? O que acontece quando começa uma nova semana e o estudo ainda está em andamento?","links":["avaliacao","galeria"]}
+      ],"links":["conversa","acompanhamento"]
+    },
+    {
+      "id":"percurso-aula","group":"Percursos completos","title":"Professor prepara e dá a aula",
+      "path":"Professor → Aulas → encontro → exercício → sala → acompanhamento.",
+      "purpose":"Revisar a continuidade entre planejamento, encontro, prática e orientação.",
+      "current":"A agenda, tarefa, sala e conversas já compartilham registros, mas iniciar/encerrar a sessão, concluir a aula e registrar presença ainda são ações separadas.",
+      "assumption":"A proposta presume um encontro planejado seguido de prática. Você pode ter outro formato, como desenhar durante a aula, plantões ou projetos de várias semanas.",
+      "question":"Narre uma aula do começo ao fim, incluindo o que você faz enquanto os alunos desenham. Que transições precisam acontecer sem reorganizar tudo manualmente?",
+      "items":[
+        {"id":"aula-fluxo-1","title":"1. Preparar encontro e proposta","description":"Cria um encontro, vincula exercício e etapas, publica nos sketchbooks. Os alunos já podem consultar os registros.","question":"Você prepara materiais e tarefa juntos? Algo precisa ficar oculto até a aula?","links":["aulas","exercicios"]},
+        {"id":"aula-fluxo-2","title":"2. Receber a turma","description":"Abre o encontro; alunos participam pela tela inicial ou pelo mapa. A conversa de texto é a da aula.","question":"Como começa o encontro? Existe recepção, chamada, conversa inicial ou espera em um espaço comum?","links":["sala","atelie"]},
+        {"id":"aula-fluxo-3","title":"3. Explicar e praticar","description":"A prancha apoia a explicação. O aluno pode abrir o sketchbook mantendo participação, ou ir a uma mesa; o mapa oferece grupos de conversa separados.","question":"Todos precisam continuar ouvindo o professor durante a prática? O que acontece com áudio e atenção ao ir para uma mesa?","links":["sala","espacos"]},
+        {"id":"aula-fluxo-4","title":"4. Acompanhar desenhos e corrigir","description":"Dúvidas podem entrar no estudo. A correção individual volta para o caderno; levar um caso para demonstração coletiva ainda não tem percurso completo.","question":"Como escolher quem ajudar, mostrar um exemplo à turma e conservar a orientação no lugar certo?","links":["correcao","acompanhamento"]},
+        {"id":"aula-fluxo-5","title":"5. Encerrar e continuar durante a semana","description":"Encerra o encontro, registra presença e conclusão separadamente. Materiais, tarefas e conversas continuam disponíveis.","question":"O que deve ser automático ao encerrar? Qual próximo passo o aluno precisa encontrar depois?","links":["presenca","hoje"]}
+      ],"links":["sala","exercicios","espacos"]
+    },
+    {
+      "id":"percurso-chegada","group":"Percursos completos","title":"Do novo aluno à convivência",
+      "path":"Matrícula → criação de personagem → turma → mesa → estudo.",
+      "purpose":"Validar a experiência de entrada e pertencimento sem perder a conexão administrativa.",
+      "current":"Na prévia, o aluno já existe ou é matriculado manualmente. Ao entrar no papel Aluno, pode criar seu personagem e chegar ao mapa. Compra e autenticação reais ainda não fazem parte desse percurso.",
+      "assumption":"Presumi que o aluno cria personagem depois de ser matriculado e que o mapa é uma boa primeira chegada. A ordem e a recepção precisam vir da sua intenção.",
+      "question":"Imagine alguém entrando sem conhecer a escola nem o sistema. Como ele descobre quem é o professor, onde começar e com quem pode conversar?",
+      "items":[
+        {"id":"chegada-1","title":"1. Identificação e matrícula","description":"O professor cria o registro local; Google e Asaas apenas mostram simulações de vínculo.","question":"Na versão futura, o acesso começa na compra, em um convite ou em um cadastro público?","links":["conta"]},
+        {"id":"chegada-2","title":"2. Criar identidade","description":"Escolhe personagem, nickname e objetivo. Pode explorar antes de concluir. Ao finalizar, entra no mapa.","question":"O que precisa ser ensinado aqui e o que o aluno deveria descobrir aos poucos?","links":["personagem"]},
+        {"id":"chegada-3","title":"3. Encontrar pessoas","description":"O mapa mostra participantes do cenário e espaços. Não há uma recepção guiada ou apresentação social completa implementada.","question":"Quem acolhe esse aluno? Como ele sabe onde pode ir, quem pode chamar e quais combinados seguir?","links":["atelie","perfil"]},
+        {"id":"chegada-4","title":"4. Fazer o primeiro desenho junto","description":"Pode sentar em uma mesa, abrir o sketchbook e conversar no espaço. O desenho não é compartilhado com os colegas automaticamente.","question":"Qual deveria ser a primeira atividade? Como ligar apresentação, prática e convivência sem exigir que ele conheça todos os menus?","links":["espacos","sketchbook"]}
+      ],"links":["personagem","conta","atelie"]
+    },
+    {
+      "id":"fechamento","group":"Fechamento","title":"O que fica, o que muda, o que falta",
+      "path":"Use quando quiser consolidar ideias; não é necessário responder todas as áreas antes.",
+      "purpose":"Transformar suas correções em uma direção clara para a próxima versão.",
+      "current":"Este guia registra sua leitura da versão 2.0. Nenhuma marcação altera a plataforma, e nenhum item sem resposta é considerado aprovado.",
+      "assumption":"A próxima implementação deve partir das suas decisões consolidadas. Questões que você deixar em aberto continuarão abertas.",
+      "question":"Se pudesse mudar apenas três coisas agora, quais seriam? Explique o impacto na rotina de aluno e professor.",
+      "items":[
+        {"id":"fechamento-manter","title":"O que está no caminho certo","description":"Pode ser uma ideia, sensação, comportamento ou elemento específico.","question":"O que você quer preservar ao reorganizar a plataforma?"},
+        {"id":"fechamento-remover","title":"O que não deveria existir","description":"Uma funcionalidade pode estar bem executada e ainda não fazer parte da sua escola.","question":"O que podemos eliminar ou repensar desde a base? Não precisa encontrar um substituto agora."},
+        {"id":"fechamento-faltas","title":"O que não apareceu neste guia","description":"Há espaço para qualquer fluxo, regra, papel, tela ou detalhe que ainda não foi considerado.","question":"O que você esperava encontrar e não encontrou? Use os nomes que fizerem sentido para você."},
+        {"id":"fechamento-visual","title":"Ruído e identidade visual","description":"Além das funções, a densidade, os textos, a hierarquia e a aparência influenciam a navegação.","question":"Que partes parecem carregadas, genéricas ou fora da identidade Xuim Art? Onde você gostaria de ter mais espaço para a arte?"},
+        {"id":"fechamento-duvidas","title":"Decisões que ainda precisam de conversa","description":"Você pode registrar uma dúvida sem escolher uma solução.","question":"Quais pontos gostaria de discutir comigo antes de redesenhar?"}
+      ],"links":["essencia","estrutura","sketchbook"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# Dependências locais e caches
+**/node_modules/
+**/.cache/
+*.log
+
+# Arquivos gerados pelo sistema operacional
+Thumbs.db
+.DS_Store
+
+# Saídas temporárias de testes
+coverage/
+dist/

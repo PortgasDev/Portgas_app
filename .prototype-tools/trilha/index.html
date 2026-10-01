@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>Xuim Art · Seu percurso de desenho</title><style>/* FONTS */
+/* CSS */</style></head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-cube" viewBox="0 0 32 32"><path d="m16 3 12 7v13l-12 7L4 23V10Z M4 10l12 7 12-7 M16 17v13 M10 6.5l12 7v13"/></symbol>
+<symbol id="i-vehicle" viewBox="0 0 32 32"><path d="m3 21 3-9h16l6 9v4H3Z M8 12l3-5h10l4 8 M6 21h22 M14 12v9"/><circle cx="9" cy="25" r="3"/><circle cx="24" cy="25" r="3"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 32 32"><path d="M6 25C-1 9 18 8 27 3c1 13-1 27-17 22M5 29l17-18M11 21l-2-7M17 16l7 1"/></symbol>
+<symbol id="i-scene" viewBox="0 0 32 32"><path d="M3 5h26v23H3ZM3 20l10-8 8 11 8-6M22 5v7M3 23h26"/><circle cx="22" cy="12" r="3"/></symbol>
+<symbol id="i-gesture" viewBox="0 0 32 32"><circle cx="19" cy="5" r="3"/><path d="m8 12 8-1 6 6 6-2 M16 11l-3 10 8 5 4 5 M13 21l-8 9M17 10l6-2"/></symbol>
+<symbol id="i-head" viewBox="0 0 32 32"><path d="M9 29v-6C0 12 8 3 17 3c9 0 11 8 10 13l2 4h-5v5h-7v4M8 12h17M16 4v19M10 19h11"/></symbol>
+<symbol id="i-check" viewBox="0 0 32 32"><path d="m7 16 6 6L26 9"/></symbol>
+<symbol id="i-flag" viewBox="0 0 32 32"><path d="M7 29V4m0 1c8-5 12 5 20 0v13c-8 5-12-5-20 0"/></symbol>
+<symbol id="i-star" viewBox="0 0 32 32"><path d="m16 3 4 9 10 1-8 7 3 10-9-5-9 5 3-10-8-7 10-1Z"/></symbol>
+<symbol id="i-review" viewBox="0 0 32 32"><path d="M5 15a11 11 0 1 1 3 9M5 6v9h9"/></symbol>
+<symbol id="i-tool" viewBox="0 0 32 32"><path d="m6 27 15-15M17 7l8 8M4 25l3 3 4-4-3-3M18 6l3-3 8 8-3 3M13 15l4 4"/></symbol>
+<symbol id="i-book" viewBox="0 0 32 32"><path d="M16 8C11 3 6 4 3 5v22c5-2 9-2 13 1 4-3 8-3 13-1V5c-4-1-9-2-13 3ZM16 8v20"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 32 32"><path d="M5 16h21M18 7l9 9-9 9"/></symbol>
+<symbol id="i-pin" viewBox="0 0 32 32"><path d="M25 12c0 7-9 17-9 17S7 19 7 12a9 9 0 1 1 18 0Z"/><circle cx="16" cy="12" r="3"/></symbol>
+</defs></svg>
+<a class="skip" href="#main">Pular para a trilha</a>
+<div class="app-shell">
+<aside class="sidebar">
+  <a href="#" class="brand" id="brand-home" aria-label="Xuim Art — voltar ao meu próximo passo">XUIM<span>ART</span><small>ESCOLA DE DESENHO</small></a>
+  <div class="side-intro"><span class="eyebrow">SEU PERCURSO</span><h2>Todo traço<br>leva a algum lugar.</h2></div>
+  <button id="mobile-modules" class="button mobile-modules" aria-expanded="false" aria-controls="module-nav">Escolher módulo <span>＋</span></button>
+  <nav id="module-nav" aria-label="Módulos do curso"></nav>
+  <div class="sidebar-bottom"><img src="__MASCOT__" alt="Xuimzinho" class="mascot"><p>O importante é<br><strong>continuar desenhando.</strong></p></div>
+  <small class="local-note">Prévia pessoal · salvo neste navegador</small>
+</aside>
+<main id="main" tabindex="-1">
+  <header class="topbar"><span class="breadcrumb">ATELIÊ <span>/</span> TRILHA DE APRENDIZADO</span><div><button id="projects-button" class="text-button">Os 6 projetos</button><button id="save-button" class="text-button">Guardar percurso ↗</button></div></header>
+  <div id="storage-warning" class="storage-warning" role="alert" hidden></div>
+  <section class="intro"><div><span class="eyebrow">DESENHAR É CONSTRUIR UM CAMINHO</span><h1>Um traço.<br><em>Uma descoberta.</em></h1><p>48 semanas para observar, experimentar<br class="desktop-break"> e dar forma às suas ideias.</p></div><div class="journey-summary"><div class="progress-medal"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="track" cx="60" cy="60" r="52"/><circle id="course-ring" class="fill" cx="60" cy="60" r="52"/></svg><div><strong id="total-completed">0</strong><span>DE 48 SEMANAS</span></div></div><div class="summary-copy"><strong id="summary-title">Seu primeiro traço espera.</strong><p id="summary-note">O caminho é seu. Avance no seu ritmo.</p><button id="continue-button" class="button primary">Começar minha jornada <span>→</span></button><button id="review-button" class="review-link" hidden></button></div></div></section>
+  <section id="module-top" class="module-header" aria-label="Módulo selecionado"></section>
+  <div class="learning-grid"><section class="route-paper" aria-label="Semanas deste módulo"><div class="route-paper-heading"><span class="paper-eyebrow">UM PASSO DE CADA VEZ</span><div class="legend"><span><i class="done-dot"></i>Concluída</span><span><i class="current-dot"></i>Seu foco</span></div></div><div id="route" class="route"></div><div id="module-finish" class="module-finish"></div><p class="paper-footnote">Você pode abrir qualquer semana e revisitar o caminho.</p></section><aside id="week-panel" class="week-panel" aria-label="Detalhes da semana"></aside></div>
+  <footer class="page-footer"><span>XUIM ART / SEU PROCESSO IMPORTA.</span><span id="save-status" role="status">Pronto para começar.</span></footer>
+</main></div>
+<dialog id="week-dialog" class="week-dialog" aria-labelledby="mobile-week-title"><div class="dialog-top"><span id="mobile-week-title">Sua semana</span><button class="close" data-close aria-label="Fechar semana">×</button></div><div id="mobile-week-content"></div></dialog>
+<dialog id="overview-dialog" class="overview-dialog" aria-labelledby="overview-title"><div class="dialog-top"><h2 id="overview-title"></h2><button class="close" data-close aria-label="Fechar janela">×</button></div><div id="overview-content"></div></dialog>
+<dialog id="restore-dialog" aria-labelledby="restore-title"><div class="dialog-top"><h2 id="restore-title">Retomar este percurso?</h2><button class="close" data-close aria-label="Cancelar restauração">×</button></div><p id="restore-summary"></p><p class="muted">Esta ação substitui o progresso e as anotações desta trilha neste navegador. Exporte uma cópia atual se quiser preservá-la.</p><button id="restore-current" class="button">Guardar a cópia atual</button><button id="restore-confirm" class="button primary">Substituir e retomar</button></dialog>
+<input id="backup-file" type="file" accept="application/json,.json" hidden>
+<div id="toast" class="toast" role="status" hidden><span id="toast-text"></span><button id="undo-button" hidden>Desfazer</button></div>
+<script id="curriculum" type="application/json">__CURRICULUM__</script>
+<!-- LICENSES -->
+<script>/* JS */</script>
+</body></html>

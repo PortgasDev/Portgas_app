@@ -1,0 +1,158 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+#xuim-medida-demo{font:15px/1.5 'DM Sans',sans-serif;color:#F5F3F0;background:#121214;border-radius:8px;overflow:hidden;color-scheme:dark}
+#xuim-medida-demo *{box-sizing:border-box}
+#xuim-medida-demo .xm-top{padding:16px 20px;border-bottom:1px solid #34343A;display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+#xuim-medida-demo .xm-brand{font-weight:700;font-size:18px}
+#xuim-medida-demo .xm-brand span{color:#F45A78}
+#xuim-medida-demo .xm-kicker{font:12px 'IBM Plex Mono',monospace;color:#AAA9B1}
+#xuim-medida-demo .xm-tools{display:flex;gap:8px;flex-wrap:wrap;padding:16px 20px}
+#xuim-medida-demo button{font:500 14px 'DM Sans',sans-serif;border:1px solid #81818E;border-radius:6px;padding:10px 14px;min-height:44px;background:#25252B;color:#F5F3F0}
+#xuim-medida-demo button:disabled{opacity:.45}
+#xuim-medida-demo .xm-primary{background:#DE2246;border-color:#DE2246;color:#FFFFFF}
+#xuim-medida-demo .xm-boards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#81818E}
+#xuim-medida-demo .xm-board{min-width:0;background:#F5F3F0;color:#121214;padding:16px 12px 12px}
+#xuim-medida-demo .xm-board-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:0 8px}
+#xuim-medida-demo h3{font:600 26px/1.1 'Barlow Condensed',sans-serif;margin:0}
+#xuim-medida-demo .xm-tag{font:12px 'IBM Plex Mono',monospace;color:#52515A}
+#xuim-medida-demo svg{width:100%;height:290px;display:block;overflow:visible}
+#xuim-medida-demo .xm-figure{stroke:#34343A;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#xuim-medida-demo .xm-construction{stroke:#81818E;stroke-width:1;stroke-dasharray:3 5;fill:none}
+#xuim-medida-demo .xm-unit{stroke:#DE2246;stroke-width:3;fill:none}
+#xuim-medida-demo .xm-unit-label{fill:#A80F30;font:15px 'IBM Plex Mono',monospace}
+#xuim-medida-demo .xm-caliper{touch-action:none;cursor:grab}
+#xuim-medida-demo .xm-caliper:active{cursor:grabbing}
+#xuim-medida-demo .xm-note{font-size:13px;color:#52515A;padding:0 8px;min-height:40px}
+#xuim-medida-demo .xm-adjust{padding:16px 20px;display:grid;gap:12px;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+#xuim-medida-demo .xm-adjust label{display:block;font-size:14px}
+#xuim-medida-demo input[type=range]{display:block;width:100%;accent-color:#F45A78;min-height:32px;margin:4px 0 0}
+#xuim-medida-demo .xm-feedback{margin:0 20px 20px;border-left:3px solid #F45A78;padding:0 0 0 12px;font-size:14px;min-height:42px}
+#xuim-medida-demo .xm-feedback[hidden]{display:none}
+@media(max-width:559px){#xuim-medida-demo .xm-boards{grid-template-columns:1fr}#xuim-medida-demo .xm-adjust{grid-template-columns:1fr}#xuim-medida-demo .xm-top,#xuim-medida-demo .xm-tools{padding:12px 16px}}
+</style>
+<div id="xuim-medida-demo" aria-label="Proposta interativa do Olho de Régua: medidas comparativas">
+  <div class="xm-top"><div class="xm-brand">Xuim Art<span>.</span></div><div class="xm-kicker">OLHO DE RÉGUA · ESTUDO DE MECÂNICA</div></div>
+  <div class="xm-tools">
+    <button type="button" class="xm-primary cursor-interaction" data-action="capture">1. Capturar a cabeça</button>
+    <button type="button" class="cursor-interaction" data-action="carry" disabled>2. Levar ao antebraço</button>
+  </div>
+  <div class="xm-boards">
+    <section class="xm-board">
+      <div class="xm-board-head"><h3>Referência</h3><span class="xm-tag">UMA MEDIDA, X</span></div>
+      <svg data-ref role="img" aria-label="Figura de estudo com compasso móvel de comprimento fixo. Use os botões para capturar a cabeça e comparar com o antebraço."><g data-art></g></svg>
+      <div class="xm-note" data-hint aria-live="polite">Capture a distância do topo da cabeça ao queixo.</div>
+    </section>
+    <section class="xm-board">
+      <div class="xm-board-head"><h3>Sua cópia</h3><span class="xm-tag" data-copy-label>AJUSTE A RELAÇÃO</span></div>
+      <svg data-copy role="img" aria-label="Cópia da figura com comprimento do antebraço ajustável pelo controle abaixo."><g data-art></g></svg>
+      <div class="xm-note">A cabeça é a unidade. Ajuste o antebraço da cópia.</div>
+    </section>
+  </div>
+  <div class="xm-adjust">
+    <label>Comprimento do antebraço<input aria-label="Comprimento do antebraço na cópia" type="range" min="0.6" max="1.6" step="0.01" value="1.4" aria-valuetext="Ajuste visual, sem revelar a proporção"></label>
+    <button type="button" class="xm-primary cursor-interaction" data-action="check" disabled>3. Comparar</button>
+  </div>
+  <div class="xm-feedback" data-feedback aria-live="polite" hidden></div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('xuim-medida-demo');
+  const ref = root.querySelector('[data-ref]');
+  const copy = root.querySelector('[data-copy]');
+  const range = root.querySelector('input');
+  const feedback = root.querySelector('[data-feedback]');
+  const carry = root.querySelector('[data-action="carry"]');
+  const check = root.querySelector('[data-action="check"]');
+  let state = { captured: false, carried: false, checked: false, ratio: 1.4, x: 84, y: 38, angle: 90 };
+  let drag = null;
+  function restore(saved) {
+    const s = saved?.privateContent;
+    if (!s || s.version !== 1) return;
+    state = {captured: !!s.captured, carried: !!s.carried, checked: !!s.checked,
+      ratio: bounded(s.ratio, .6, 1.6, 1.4), x: bounded(s.x, 30, 240, 84),
+      y: bounded(s.y, 25, 240, 38), angle: bounded(s.angle, -180, 180, 90)};
+  }
+  function bounded(n, min, max, fallback) { return Number.isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback; }
+  function save() {
+    window.openai?.setWidgetState?.({
+      modelContent: {demo: 'Medida comparativa', medidaCapturada: state.captured, transportada: state.carried, antebracoEmCabecas: state.ratio, comparacaoRevelada: state.checked},
+      privateContent: {...state, version: 1}
+    })?.catch(() => {});
+  }
+  function figure(ratio, student) {
+    const wrist = 165 + 60 * ratio;
+    return `<g class="xm-figure">
+      <ellipse cx="122" cy="68" rx="24" ry="30"/>
+      <path d="M113 97 L112 111 L91 121 L86 171 L95 205 M132 97 L133 109 L150 119 L173 164 M142 129 L157 177 M110 121 L103 193 L137 193 L145 132 M103 194 L91 236 L74 271 L60 278 L81 278 L107 242 L122 211 L134 242 L139 278 L156 278 L149 269 L151 236 L137 194"/>
+      <path d="M165 163 L${wrist} 165 L${wrist+12} 168 L${wrist+16} 174 L${wrist+6} 179 L${wrist} 176 L165 181 Z" ${student?'stroke="#DE2246"':''}/>
+      <path d="M94 204 L88 216 L93 223 L102 215 L102 204"/>
+      </g><g class="xm-construction"><path d="M122 40 L122 96 M99 65 L145 65 M109 130 L136 185"/><circle cx="165" cy="172" r="5"/><path d="M${wrist} 164 L${wrist} 180"/></g>`;
+  }
+  function unit(x,y,angle,interactive=false) {
+    return `<g transform="translate(${x} ${y}) rotate(${angle})" ${interactive?'class="xm-caliper" data-caliper':''}>
+      <path class="xm-unit" d="M0 -7 V7 M0 0 H60 M60 -7 V7"/>
+      ${interactive?'<path data-move d="M0 0 H60" stroke="transparent" stroke-width="30"/><circle data-rotate cx="60" cy="0" r="17" fill="transparent"/><circle cx="60" cy="0" r="4" fill="#DE2246" pointer-events="none"/>':''}
+      <text class="xm-unit-label" x="30" y="-11" text-anchor="middle" transform="rotate(${-angle} 30 -11)" pointer-events="none">X</text>
+    </g>`;
+  }
+  function frame(svg) {
+    const width = svg.getBoundingClientRect().width || 300;
+    svg.setAttribute('viewBox', `0 0 ${width} 290`);
+    svg.querySelector('[data-art]').setAttribute('transform', `translate(${(width-300)/2} 0)`);
+  }
+  function render() {
+    ref.querySelector('[data-art]').innerHTML = figure(1,false) +
+      (state.captured ? unit(state.x,state.y,state.angle,true) : '<path stroke="#81818E" stroke-dasharray="3 4" fill="none" d="M84 38 H94 M84 38 V98 M84 98 H94"/>');
+    copy.querySelector('[data-art]').innerHTML = figure(state.ratio,true) +
+      (state.checked ? unit(165,198,0) + unit(84,38,90) : '');
+    range.value = state.ratio;
+    carry.disabled = !state.captured;
+    check.disabled = !state.carried;
+    root.querySelector('[data-action="capture"]').textContent = state.captured ? '1. Recapturar a cabeça' : '1. Capturar a cabeça';
+    root.querySelector('[data-hint]').textContent = !state.captured ? 'Capture a distância do topo da cabeça ao queixo.' :
+      state.carried ? 'Cabe uma cabeça neste antebraço: 1 X.' : 'Arraste a barra; gire pela ponta. O tamanho fica travado.';
+    root.querySelector('[data-copy-label]').textContent = state.checked ? state.ratio.toFixed(2).replace('.',',')+' X' : 'AJUSTE A RELAÇÃO';
+    feedback.hidden = !state.checked;
+    const difference = Math.round(Math.abs(state.ratio-1)*100);
+    feedback.textContent = difference <= 3 ? 'Relação próxima da referência. Cabeça e antebraço ocupam aproximadamente a mesma medida neste desenho.' :
+      `Na referência: 1 X. Na cópia: ${state.ratio.toFixed(2).replace('.',',')} X. O antebraço ficou ${state.ratio > 1 ? 'mais longo' : 'mais curto'}. ${state.ratio > 1 ? 'Aproxime' : 'Afaste'} o punho do cotovelo e compare novamente.`;
+    frame(ref); frame(copy);
+  }
+  root.querySelector('[data-action="capture"]').addEventListener('click', () => {
+    Object.assign(state,{captured:true,carried:false,checked:false,x:84,y:38,angle:90}); render(); save();
+  });
+  carry.addEventListener('click', () => {
+    Object.assign(state,{carried:true,x:165,y:172,angle:0}); render(); save();
+  });
+  check.addEventListener('click', () => { state.checked=true; render(); save(); });
+  range.addEventListener('input', () => { state.ratio=Number(range.value); state.checked=false; render(); });
+  range.addEventListener('change', save);
+  function point(event) {
+    const box = ref.getBoundingClientRect();
+    return {x:event.clientX-box.left-(box.width-300)/2,y:event.clientY-box.top};
+  }
+  ref.addEventListener('pointerdown', event => {
+    if (!state.captured || !event.target.closest('[data-caliper]')) return;
+    const p=point(event);
+    drag={rotate:!!event.target.closest('[data-rotate]'),dx:p.x-state.x,dy:p.y-state.y};
+    ref.setPointerCapture(event.pointerId); event.preventDefault();
+  });
+  ref.addEventListener('pointermove', event => {
+    if (!drag) return;
+    const p=point(event);
+    if(drag.rotate) state.angle=Math.atan2(p.y-state.y,p.x-state.x)*180/Math.PI;
+    else { state.x=bounded(p.x-drag.dx,30,240,84); state.y=bounded(p.y-drag.dy,25,240,38); }
+    state.carried = Math.hypot(state.x-165,state.y-172)<14 && Math.abs(state.angle)<14;
+    render();
+  });
+  function endDrag() { if(drag) {drag=null;save();} }
+  ref.addEventListener('pointerup',endDrag);
+  ref.addEventListener('pointercancel',endDrag);
+  restore(window.openai?.widgetState);
+  window.addEventListener('openai:set_globals', event => {
+    if(event.detail?.globals?.widgetState) {restore(event.detail.globals.widgetState);render();}
+  });
+  render();
+  if(typeof ResizeObserver !== 'undefined') new ResizeObserver(() => {frame(ref);frame(copy);}).observe(root);
+})();
+</script>

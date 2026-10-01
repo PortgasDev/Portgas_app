@@ -1,0 +1,11 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'../..');
+const manual=fs.readFileSync(path.join(root,'manual-xuim-art.html'),'utf8');
+const fonts=manual.match(/@font-face\s*\{[^}]+\}/g);
+if(!fonts?.length)throw new Error('Missing brand fonts');
+const licenses=manual.match(/<script type="application\/json" id="font-licenses">[\s\S]*?<\/script>/);
+let html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+for(const [marker,value] of [['/* FONTS */',fonts.join('\n')],['/* CSS */',fs.readFileSync(path.join(__dirname,'../olho-regua/style.css'),'utf8')+'\n'+fs.readFileSync(path.join(__dirname,'style.css'),'utf8')],['/* MODEL */',fs.readFileSync(path.join(__dirname,'model.js'),'utf8')],['/* APP */',fs.readFileSync(path.join(__dirname,'app.js'),'utf8')],['<!-- LICENSES -->',licenses?.[0]||'']])html=html.replace(marker,()=>value);
+fs.writeFileSync(path.join(root,'olho-de-regua.html'),html);
+console.log('Built olho-de-regua.html: '+Buffer.byteLength(html)+' bytes; offline.');
