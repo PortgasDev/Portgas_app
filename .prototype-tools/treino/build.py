@@ -6,7 +6,7 @@ manual=(root/'manual-xuim-art.html').read_text(encoding='utf-8')
 fonts='\n'.join(re.findall(r'@font-face\s*\{[^}]+\}',manual))
 licenses=re.search(r'<script type="application/json" id="font-licenses">.*?</script>',manual,re.S).group()
 games={}
-for key,name in [('regua','olho-de-regua-aquecimento.html'),('cubo','cube-perspectiva.html'),('elipse','elipse-perspectiva.html')]:
+for key,name in [('regua','olho-de-regua-aquecimento.html'),('cubo','cube-perspectiva.html'),('elipse','elipse-perspectiva.html'),('cilindros','cilindros.html')]:
     game=(root/name).read_text(encoding='utf-8')
     # The parent owns cross-game navigation; help and exercise controls remain visible.
     game=re.sub(r'<a[^>]*href="(?:olho-de-regua|treino-do-olhar)\.html"[^>]*>.*?</a>','',game)
@@ -17,4 +17,4 @@ html=html.replace('</head>','<script id="xuim-shortcuts">'+(here/'shortcuts.js')
 for token,content in [('/* FONTS */',fonts),('/* CSS */',(here/'style.css').read_text(encoding='utf-8')),('/* JS */',(here/'app.js').read_text(encoding='utf-8')),('<!-- LICENSES -->',licenses),('__GAMES__',json.dumps(games,ensure_ascii=False).replace('<','\\u003c')),('__LOGO__','data:image/webp;base64,'+base64.b64encode((root/'.prototype-tools/asset-1.webp').read_bytes()).decode())]:
     html=html.replace(token,content)
 (root/'treino-do-olhar.html').write_text(html,encoding='utf-8')
-print(f'Built treino-do-olhar.html: {len(html.encode()):,} bytes; three embedded games.')
+print(f'Built treino-do-olhar.html: {len(html.encode()):,} bytes; {len(games)} embedded games.')

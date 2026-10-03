@@ -5,7 +5,7 @@ const assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'../..');
 const html=fs.readFileSync(path.join(root,'treino-do-olhar.html'),'utf8');
 const games=JSON.parse(html.match(/<script id="games" type="application\/json">([\s\S]*?)<\/script>/)[1]);
-assert.deepEqual(Object.keys(games),['regua','cubo','elipse']);
+assert.deepEqual(Object.keys(games),['regua','cubo','elipse','cilindros']);
 assert(games.regua.includes('Divisões do segmento')&&!games.regua.includes('CompareCore'));
 assert(games.cubo.includes('traceBtn'));
 for(const doc of [html,...Object.values(games)]){
@@ -37,5 +37,9 @@ d.querySelector('#back').click();d.querySelector('#leave').click();
 assert.equal(d.querySelector('iframe'),null,'Leaving removes timers and listeners');
 assert.equal(d.querySelector('#lobby').hidden,false);
 assert(d.querySelector('#resume').textContent.includes('Elipse'));
+d.querySelector('[data-game=cilindros]').click();
+assert.equal(d.querySelector('iframe').title,'Construindo Cilindros');
+assert.equal(d.querySelector('iframe').srcdoc,games.cilindros);
+assert(games.cilindros.includes('CylinderCore'));
 dom.window.close();
 console.log('PASS: embedded games, syntax, offline assets, selected simple version, switch/cancel, session teardown and return.');

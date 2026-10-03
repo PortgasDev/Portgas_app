@@ -4,10 +4,11 @@
  const modes={tutorial:'Tutorial',classic:'Desafio clássico',endless:'Infinito',daily:'Desafio diário'};
  const today=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();};
  function seeded(text){let a=2166136261;for(const c of text)a=Math.imul(a^c.charCodeAt(0),16777619);return()=>{a+=0x6D2B79F5;let t=Math.imul(a^a>>>15,1|a);t^=t+Math.imul(t^t>>>7,61|t);return((t^t>>>14)>>>0)/4294967296;};}
- function setup(level,descriptions,tries=0,warmup=false){
-  return '<div class="training-setup"><div><span class="training-label" id="level-label">Dificuldade</span><div class="training-options" role="group" aria-labelledby="level-label">'+levels.map((name,i)=>'<button type="button" data-level="'+i+'" aria-pressed="'+(level===i)+'">'+name+'</button>').join('')+'</div><p class="training-description">'+descriptions[level]+'</p></div><div><span class="training-label">Modo de jogo</span><div class="training-modes">'+Object.entries(modes).map(([key,name],i)=>'<button class="training-mode" data-training-mode="'+key+'" '+(key==='daily'&&tries>=3?'disabled':'')+'><span class="training-icon" aria-hidden="true">'+['✎','◇','∞','☼'][i]+'</span><span><strong>'+name+'</strong><small>'+['Aprenda com apoio visual. Sem tempo nem recordes.',(warmup?'2 aquecimentos + ':'')+'6 rodadas de 30 segundos.','Meta crescente; o tempo diminui a cada rodada.',Math.max(0,3-tries)+' tentativas hoje · 6 rodadas de 30s. Mesmo desafio nesta dificuldade.'][i]+'</small></span><span aria-hidden="true">↗</span></button>').join('')+'</div></div></div>';
+ function setup(level,descriptions,tries=0,warmup=false,options={}){
+  const seconds=options.seconds??30;
+  return '<div class="training-setup"><div><span class="training-label" id="level-label">Dificuldade</span><div class="training-options" role="group" aria-labelledby="level-label">'+levels.map((name,i)=>'<button type="button" data-level="'+i+'" aria-pressed="'+(level===i)+'">'+name+'</button>').join('')+'</div><p class="training-description">'+descriptions[level]+'</p></div><div><span class="training-label">Modo de jogo</span><div class="training-modes">'+Object.entries(modes).map(([key,name],i)=>'<button class="training-mode" data-training-mode="'+key+'" '+(key==='daily'&&tries>=3?'disabled':'')+'><span class="training-icon" aria-hidden="true">'+['✎','◇','∞','☼'][i]+'</span><span><strong>'+name+'</strong><small>'+['Aprenda com apoio visual. Sem tempo nem recordes.',(warmup?'2 aquecimentos + ':'')+'6 rodadas de '+seconds+' segundos.','Meta crescente; o tempo diminui a cada rodada.',Math.max(0,3-tries)+' tentativas hoje · 6 rodadas de '+seconds+'s. Mesmo desafio nesta dificuldade.'][i]+'</small></span><span aria-hidden="true">↗</span></button>').join('')+'</div></div></div>';
  }
- function create(game,onTimeout){
+ function create(game,onTimeout,options={}){
   const r={mode:'tutorial',level:0,round:0,deadline:0,available:true,random:Math.random,saved:false};
   const key=s=>'xuim.training.v1.'+game+'.'+s;
   function read(s,fallback){try{return JSON.parse(localStorage.getItem(key(s)))??fallback;}catch{r.available=false;return fallback;}}
@@ -19,7 +20,7 @@
    if(mode==='daily'){const d=r.daily();if(d.tries>=3)return false;d.tries++;write('daily.'+level,d);}
    r.random=mode==='daily'?seeded(game+':'+r.date+':'+level):Math.random;return true;
   };
-  r.next=()=>{r.round++;r.duration=r.mode==='tutorial'?0:r.mode==='endless'?Math.max(8,35-(r.round-1)*1.5):30;r.deadline=r.duration?performance.now()+r.duration*1000:0;};
+  r.next=()=>{r.round++;r.duration=r.mode==='tutorial'?0:r.mode==='endless'?Math.max(options.minSeconds??8,(options.endlessStart??35)-(r.round-1)*(options.step??1.5)):(options.seconds??30);r.deadline=r.duration?performance.now()+r.duration*1000:0;};
   r.stop=()=>{r.deadline=0;};
   r.target=()=>Math.min(90,40+(r.round-1)*4);
   r.ended=score=>r.mode==='endless'?score<r.target():r.mode!=='tutorial'&&r.round>=6;
