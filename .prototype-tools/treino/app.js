@@ -1,12 +1,12 @@
 (()=>{
   'use strict';
   const games=JSON.parse(document.getElementById('games').textContent);
-  const names={regua:'Olho de Régua',cubo:'Cubo em Perspectiva',elipse:'Elipse em Perspectiva',cilindros:'Construindo Cilindros'};
+  const names={regua:'Olho de Régua',cubo:'Cubo em Perspectiva',elipse:'Elipse em Perspectiva',cilindros:'Construindo Cilindros',blobs:'Blobs'};
   const $=id=>document.getElementById(id);
   let current=null,pending=null;
   const keys=window.XuimKeys;
   let capturing=null;
-  const scopes={pen:'Cubo, elipse e cilindros',line:'Cubo, elipse e cilindros',eraser:'Cubo',confirm:'Todos os jogos',undo:'Cubo, elipse e cilindros',redo:'Cubo',clear:'Cubo, elipse e parte selecionada do cilindro',guide:'Tutoriais e revisão de cubo, elipse e cilindros',retry:'Tutoriais dos quatro jogos'};
+  const scopes={pen:'Cubo, elipse e cilindros',line:'Cubo, elipse e cilindros',eraser:'Cubo',confirm:'Todos os jogos',undo:'Cubo, elipse e cilindros',redo:'Cubo',clear:'Cubo, elipse e parte selecionada do cilindro',guide:'Tutoriais e revisão de cubo, elipse e cilindros',retry:'Tutoriais dos jogos'};
   function renderKeys(){const map=keys.read();$('key-fields').innerHTML=Object.keys(keys.defaults).map(id=>`<div class="key-row"><span>${keys.labels[id]}<small>${scopes[id]}</small></span><button type="button" data-key="${id}" aria-label="Alterar atalho: ${keys.labels[id]}" aria-pressed="${capturing===id}">${capturing===id?'Pressione…':keys.label(map[id])}</button></div>`).join('');}
   $('key-fields').addEventListener('click',e=>{const b=e.target.closest('[data-key]');if(!b)return;capturing=b.dataset.key;renderKeys();$('key-fields').querySelector(`[data-key="${capturing}"]`).focus();$('key-status').textContent='Pressione a nova tecla. Escape cancela.';});
   $('key-fields').addEventListener('keydown',e=>{

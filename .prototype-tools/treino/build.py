@@ -6,7 +6,7 @@ manual=(root/'manual-xuim-art.html').read_text(encoding='utf-8')
 fonts='\n'.join(re.findall(r'@font-face\s*\{[^}]+\}',manual))
 licenses=re.search(r'<script type="application/json" id="font-licenses">.*?</script>',manual,re.S).group()
 games={}
-for key,name in [('regua','olho-de-regua-aquecimento.html'),('cubo','cube-perspectiva.html'),('elipse','elipse-perspectiva.html'),('cilindros','cilindros.html')]:
+for key,name in [('regua','olho-de-regua-aquecimento.html'),('cubo','cube-perspectiva.html'),('elipse','elipse-perspectiva.html'),('cilindros','cilindros.html'),('blobs','blobs.html')]:
     game=(root/name).read_text(encoding='utf-8')
     # The parent owns cross-game navigation; help and exercise controls remain visible.
     game=re.sub(r'<a[^>]*href="(?:olho-de-regua|treino-do-olhar)\.html"[^>]*>.*?</a>','',game)
