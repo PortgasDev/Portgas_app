@@ -338,7 +338,7 @@
       frame.focus();
     } else {
       requestAnimationFrame(() => {
-        const target = document.getElementById(route || 'visuais');
+        const target = route ? document.getElementById(route) : null;
         target?.scrollIntoView({ behavior: 'instant', block: 'start' });
       });
     }
